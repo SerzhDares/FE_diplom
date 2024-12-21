@@ -7,7 +7,7 @@ export const Reviews = () => {
      <div className="container">
       <h2 className="section_title">Отзывы</h2>
       <div className="reviews_container">
-        <Review reviewImg={"/src/images/review_1.png"} reviewTitle={"Екатерина Вальнова"}
+        <Review reviewImg={"src/images/review_1.png"} reviewTitle={"Екатерина Вальнова"}
           reviewText={
             `Доброжелательные подсказки 
             на всех этапах помогут правильно заполнить
@@ -15,7 +15,7 @@ export const Reviews = () => {
             билет, даже если вы заказываете онлайн билет
             впервые.`}
         />
-        <Review reviewImg={"/src/images/review_2.png"} reviewTitle={"Евгений Стрыкало"}
+        <Review reviewImg={"src/images/review_2.png"} reviewTitle={"Евгений Стрыкало"}
           reviewText={
             `СМС-сопровождение до посадки
              сразу после оплаты ж/д билетов

@@ -35,7 +35,7 @@ export const Train = ({
     <div className="ticket">
         <div className="number_route_section">
             <div className="img_container">
-                <img src="/src/images/white_train_icon.svg" alt="TRAIN" className="train_img"/>
+                <img src="src/images/white_train_icon.svg" alt="TRAIN" className="train_img"/>
             </div>
             <span className="train_number">{thereTrainNumber}</span>
             <div className="train_route">
@@ -176,7 +176,7 @@ export const Train = ({
 
             </div>
             <div className="options_button_block">
-                <img src="/src/images/wagon_options.svg" alt="options" className="wagon_options_icons"/>
+                <img src="src/images/wagon_options.svg" alt="options" className="wagon_options_icons"/>
                 <HashLink smooth to={routeLink}>
                     <button className={btnType}>{btnText}</button>
                 </HashLink>

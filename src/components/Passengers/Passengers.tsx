@@ -37,7 +37,7 @@ export const Passengers = () => {
                     <span className="passenger_data_title_text">Добавить пассажира</span>
                   </div>
                   <button className="add_passenger_btn" onClick={addPassenger}>
-                    <img src="/src/images/add_passenger_icon.svg" alt="добавить" className="add_passenger_icon"/>
+                    <img src="src/images/add_passenger_icon.svg" alt="добавить" className="add_passenger_icon"/>
                   </button>
                 </div>
               </div>

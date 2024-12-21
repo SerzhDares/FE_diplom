@@ -14,7 +14,7 @@ export const LastTicket = () => {
             </div>
         </div>
         <div className="last_ticket_options_price">
-            <img src="/src/images/last_ticket_options.svg" alt="options" className="last_ticket_options"/>
+            <img src="src/images/last_ticket_options.svg" alt="options" className="last_ticket_options"/>
             <div className="last_ticket_price">
                 <span className="price_from last_ticket_price_from">от </span>
                 <span className="last_ticket_price_value">2 500</span>

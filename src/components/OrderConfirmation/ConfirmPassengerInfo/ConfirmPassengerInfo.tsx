@@ -13,7 +13,7 @@ export const ConfirmPassengerInfo = ({passengerType, fullName, sex, birthday, do
   return (
     <div className="confirm_passenger_info">
         <div className="passenger_type">
-            <img src="/src/images/orange_passenger_icon.svg" alt="пассажир" className="confirm_passenger_icon"/>
+            <img src="src/images/orange_passenger_icon.svg" alt="пассажир" className="confirm_passenger_icon"/>
             <span className="passenger_type_title">{passengerType}</span>
         </div>
         <div className="passenger_data_confirm">

@@ -18,14 +18,14 @@ export const PlacesChoosingParams = () => {
     stationTo: "Ладожский вокзал",
     durationHours: 9,
     durationMinutes: 42,
-    directionArrow: "/src/images/orange_right_arrow.svg"
+    directionArrow: "src/images/orange_right_arrow.svg"
   }
 
   return (
     <div className="places_choosing_params">
         <ChooseOtherTrain 
             directionClass={"choose_other_there"} 
-            directionImg={"/src/images/choose_other_there.svg"}
+            directionImg={"src/images/choose_other_there.svg"}
         />
         <TrainTimeInfo {...trainTimeInfoParams}/>
         <TicketsQuantity/>

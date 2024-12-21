@@ -150,7 +150,7 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
                 <span className="passenger_data_title_text">Пассажир {passengerNumber}</span>
             </div>
             <button className="delete_passenger_btn" onClick={deletePassenger}>
-                <img src="/src/images/delete_passenger_icon.svg" alt="удалить" className="delete_passenger_icon"/>
+                <img src="src/images/delete_passenger_icon.svg" alt="удалить" className="delete_passenger_icon"/>
             </button>
         </div>
         <div className={isOpen? "passenger_data_main" : "passenger_data_main close"}>

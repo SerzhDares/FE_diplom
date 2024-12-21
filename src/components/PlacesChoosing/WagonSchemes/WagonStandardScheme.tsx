@@ -4,7 +4,7 @@ export const WagonStandardScheme = () => {
   return (
     <>
       <div className="wagon_scheme">
-        <img src="/src/images/wagon_beginning.jpg" alt="начало вагона" className="wagon_beginning"/>
+        <img src="src/images/wagon_beginning.jpg" alt="начало вагона" className="wagon_beginning"/>
         <div className="places_scheme">
           <div className="coupes_scheme">
             <div className="coupes_places coupes_top-places">
@@ -111,7 +111,7 @@ export const WagonStandardScheme = () => {
             </div>
           </div>
         </div>
-        <img src="/src/images/wagon_ending.jpg" alt="конец вагона" className="wagon_ending"/>
+        <img src="src/images/wagon_ending.jpg" alt="конец вагона" className="wagon_ending"/>
       </div>
     </>
   )

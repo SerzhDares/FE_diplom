@@ -22,7 +22,7 @@ export const TrainTimeInfo = ({
   return (
     <div className="train_time_info">
         <div className="tti_block train_info">
-            <img src="/src/images/orange_train_icon.svg" alt="train" className="train_info_img"/>
+            <img src="src/images/orange_train_icon.svg" alt="train" className="train_info_img"/>
             <div className="train_info_text">
                 <span className="train_number">{trainNumber}</span>
                 <div className="train_route">
@@ -47,7 +47,7 @@ export const TrainTimeInfo = ({
             </div>
         </div>
         <div className="tti_block duration_info">
-            <img src="/src/images/orange_clock.svg" alt="часы" className="duration_info_img"/>
+            <img src="src/images/orange_clock.svg" alt="часы" className="duration_info_img"/>
             <span className="duration_info_text">{durationHours} часов<br/>{durationMinutes} минуты</span>
         </div>
     </div>

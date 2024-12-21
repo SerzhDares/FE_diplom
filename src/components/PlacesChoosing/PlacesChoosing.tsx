@@ -23,7 +23,7 @@ export const PlacesChoosing = () => {
     stationTo: "Ладожский вокзал",
     durationHours: 9,
     durationMinutes: 42,
-    directionArrow: "/src/images/orange_right_arrow.svg"
+    directionArrow: "src/images/orange_right_arrow.svg"
   }
 
   return (
@@ -41,7 +41,7 @@ export const PlacesChoosing = () => {
                 <div className="places_choosing_params">
                     <ChooseOtherTrain 
                         directionClass={"choose_other_there"} 
-                        directionImg={"/src/images/choose_other_there.svg"}
+                        directionImg={"src/images/choose_other_there.svg"}
                     />
                     <TrainTimeInfo {...trainTimeInfoParams}/>
                     <TicketsQuantity/>
@@ -50,7 +50,7 @@ export const PlacesChoosing = () => {
                 <div className="places_choosing_params">
                     <ChooseOtherTrain 
                         directionClass={"choose_other_back"}
-                        directionImg={"/src/images/choose_other_back.svg"}
+                        directionImg={"src/images/choose_other_back.svg"}
                     />
                     <TrainTimeInfo
                         trainNumber={"116C"}
@@ -63,7 +63,7 @@ export const PlacesChoosing = () => {
                         stationTo={"Ладожский вокзал"}
                         durationHours={9}
                         durationMinutes={42}
-                        directionArrow={"/src/images/orange_left_arrow.svg"}
+                        directionArrow={"src/images/orange_left_arrow.svg"}
                     />
                     <TicketsQuantity/>
                     <WagonTypeChoosing/>

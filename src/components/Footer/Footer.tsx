@@ -29,7 +29,7 @@ export const Footer = () => {
         <div className="container footer_bottom_container">
           <Logo logoClass="logo footer_logo"/>
           <a href="#header">
-            <img src="/src/images/footer-button_icon.svg" alt="up" className="footer_btn"/>
+            <img src="src/images/footer-button_icon.svg" alt="up" className="footer_btn"/>
           </a>
           <span className="footer_last_text">2024 WEB</span>
         </div>

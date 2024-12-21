@@ -4,7 +4,7 @@ export const WagonSeatScheme = () => {
   return (
     <>
       <div className="wagon_scheme">
-        <img src="/src/images/wagon_beginning.jpg" alt="начало вагона" className="wagon_beginning"/>
+        <img src="src/images/wagon_beginning.jpg" alt="начало вагона" className="wagon_beginning"/>
         <div className="places_scheme">
           <div className="coupes_scheme seats_scheme">
             <div className="seat-places top-seat-places">
@@ -79,7 +79,7 @@ export const WagonSeatScheme = () => {
             <button className="place_btn seat-place_btn">62</button>
           </div>
         </div>
-        <img src="/src/images/wagon_ending.jpg" alt="конец вагона" className="wagon_ending"/>
+        <img src="src/images/wagon_ending.jpg" alt="конец вагона" className="wagon_ending"/>
       </div>
     </>
   )
