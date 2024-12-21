@@ -5,7 +5,7 @@ import App from './App.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
-  <Router>
+  <Router basename={'/FE_diplom/'}>
     <StrictMode>
       <App />
     </StrictMode>
