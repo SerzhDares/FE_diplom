@@ -13,15 +13,15 @@ export const HowItWorks = () => {
         </div>
         <div className="info_parts">
           <div className="info_part">
-            <img src="/src/images/computer_icon.svg" alt="computer" className="info_part_icon"/>
+            <img src="src/images/computer_icon.svg" alt="computer" className="info_part_icon"/>
             <span className="info_part_text">Удобный заказ<br/>на сайте</span>
           </div>
           <div className="info_part">
-            <img src="/src/images/house_icon.svg" alt="house" className="info_part_icon"/>
+            <img src="src/images/house_icon.svg" alt="house" className="info_part_icon"/>
             <span className="info_part_text">Нет необходимости<br/>ехать в офис</span>
           </div>
           <div className="info_part">
-            <img src="/src/images/planet_icon.svg" alt="planet" className="info_part_icon"/>
+            <img src="src/images/planet_icon.svg" alt="planet" className="info_part_icon"/>
             <span className="info_part_text">Огромный выбор<br/>направлений</span>
           </div>
         </div>
