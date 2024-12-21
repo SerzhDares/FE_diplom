@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+.input-error {
+  border: 1px solid #FF3D00C2 !important;
+}
+
+.header {
+  min-height: 100vh;
+  background-image: url('images/header_background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #FFA800;
+  border-bottom: 8px solid #FFA800;
+  color: #fff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.logo {
+  display: block;
+  font-weight: 900;
+  font-size: 36px;
+  padding: 15px 0;
+}
+
+.logo_link {
+  text-decoration: none;
+  color: #E5E5E5;
+}
+
+.header__form {
+  background-color: rgba(41, 41, 41, 0.8);
+  padding: 80px 25px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.date-inputs {
+  display: flex;
+  align-items: end;
+  margin-bottom: 60px;
+}
+
+.date-input-title {
+  margin-right: 35px;
+}
+
+.input_title {
+  display: block;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+input[type=text]::-webkit-input-placeholder {
+	font-size: 18px;
+	color: rgba(229, 229, 229, 1);
+}
+
+.form__input {
+  height: 60px;
+  width: 325px;
+  margin-bottom: 60px;
+  border-radius: 3px;
+  padding: 20px 40px 17px 20px;
+  background-repeat: no-repeat;
+  background-position: 95%;
+  font-size: 18px;
+  text-transform: capitalize;
+  border: none;
+}
+
+.form__input_geo {
+  background-image: url('images/geo_icon.svg');
+
+}
+
+.form__input_date {
+  background-image: url('images/calendar_icon.svg');
+  margin-bottom: 0;
+}
+
+.form__input-mrgn {
+  margin-right: 40px;
+}
+
+.backwards_btn {
+  margin-right: 5px;
+  margin-left: 5px;
+  background-image: url('images/backwards_icon.svg');
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-position: center;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.orange_btn {
+  background-color: #FFA800;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFF;
+  border-radius: 5px;
+  border: 1px solid #ffa800;
+  cursor: pointer;
+}
+
+.search_btn {
+  color: #292929;
+  padding: 17px 66px;
+  width: 323px;
+}
+
+.orange_btn:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.orange_btn:active {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #ffa800;
+  background-color: transparent;
+}
+
+.section_title {
+  text-transform: uppercase;
+  font-size: 36px;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.transparent_btn {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.transparent_btn:hover {
+  background-color: #FFCA62;
+  color:#2D2B2F;
+  border-color: #FFCA62;
+}
+
+.transparent_btn:active{
+  background-color: #fff;
+  color:#2D2B2F;
+  border-color: #fff;
+}
+
+/* train_choosing */
+
+.general_header {
+  min-height: 60vh;
+  background-image: url("/src/images/trains_background.png");
+  background-color: #292929;
+  border-bottom: none;
+}
+
+
+.choosing_page_container {
+  background-color: #F7F5F9;
+}
+
+.train_choosing_container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 95px;
+  padding-bottom: 195px;
+}
+
+.choosing_pages_title {
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.tickets_variants {
+  width: 960px;
+}
+
+/* places_choosing */
+
+.places_choosing_container,
+.passengers_container {
+  display: flex;
+  padding-top: 95px;
+  padding-bottom: 125px;
+}
+
+.transparent_black_btn {
+  color: #292929;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  background-color: transparent;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 15px 35px;
+  cursor: pointer;
+}
+
+.transparent_black_btn:hover {
+  color: #FFA800;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.transparent_black_btn:active {
+  color: #292929;
+  background-color: #FFA800;
+  border-color: #FFA800;
+}
+
+
+.next_btn,
+.buy_btn {
+  text-transform: uppercase;
+}
+
+.next_btn {
+  padding: 15px 72px;
+}
+
+.disabled_btn,
+.disabled_btn:active {
+  background-color: #928F94;
+  border-color: #928F94;
+}
+
+.disabled_btn:hover,
+.disabled_btn:active {
+  box-shadow: none;
+}
+
+.disabled_btn:active {
+  color: #FFF;
+}
+
+.btn_container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 100px;
+}
+
+/* loading */

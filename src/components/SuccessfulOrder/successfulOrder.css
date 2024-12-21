@@ -1,0 +1,134 @@
+.successful_order_header {
+    background-image: url("/src/images/successful_order_background.png") !important;
+    min-height: 85vh !important;
+}
+  
+.successful_order {
+    margin-top: -365px !important;
+    padding-bottom: 175px !important;
+}
+  
+.successful_order_header_title {
+    font-weight: 700;
+    color: #FFF;
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+  
+.successful_order_container {
+    border: 1px solid #C4C4C4;
+    box-shadow: 0px 2px 2px 0px #00000040;
+}
+  
+.successful_order_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 60px 45px;
+    background-color: #FFF;
+}
+  
+.order_number_text {
+    font-weight: 700;
+}
+  
+.sum_text {
+    color: #928F94;
+    margin-right: 15px;
+}
+  
+.successful_order_info,
+.successful_order_price {
+    font-size: 36px;
+}
+  
+.landing_rules {
+    padding: 40px 80px;
+    background-color: #F4F3F6;
+    border-top: 1px solid #C4C4C4;
+    display: flex;
+    justify-content: center;
+}
+  
+.landing_rule {
+    text-align: center;
+}
+  
+.landing_rule:nth-child(n+2) {
+    margin-left: 145px;
+}
+  
+.landing_rule_img {
+    margin-bottom: 10px;
+}
+  
+.landing_rule_text {
+    display: block;
+    font-size: 18px;
+}
+  
+.lr_bold_text {
+    font-weight: 500;
+}
+  
+.text_for_client {
+    background-color: #FFF;
+    color: #292929;
+    padding: 95px 200px 130px;
+    font-size: 24px;
+}
+  
+.client_name,
+.info_for_client,
+.thanks_for_client {
+    display: block;
+}
+  
+.client_name,
+.thanks_for_client {
+    font-weight: 700;
+}
+  
+.client_name {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+  
+.info_for_client {
+    margin-bottom: 100px;
+}
+  
+.rating_back_block {
+    background-color: #FFA800E0;
+    padding: 50px 80px;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.rating_block {
+    display: flex;
+    align-items: center;
+}
+  
+.rating_text {
+    font-size: 24px;
+    color: #292929;
+    margin-right: 40px;
+}
+
+.star-input {
+    display: none;
+}
+  
+.star {
+    cursor: pointer;
+    transition: color 200ms;
+}
+  
+.back_btn {
+    text-transform: uppercase;
+    padding: 15px 10px !important;
+}
+  
+.back_btn:hover {
+    color: #000 !important;
+}

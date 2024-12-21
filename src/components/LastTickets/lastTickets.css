@@ -1,0 +1,62 @@
+.last_tickets_item {
+    background-color: #FFF;
+    border: 1px solid #C4C4C4;
+    box-shadow: 0px 2px 2px 0px #3E3C4140;
+    padding: 18px 20px 16px 18px;
+    margin-bottom: 20px;
+}
+  
+.last_ticket_route {
+    margin-bottom: 30px;
+}
+  
+.last_ticket_route,
+.last_ticket_options_price{
+    display: flex;
+    justify-content: space-between;
+}
+  
+.last_ticket_options_price {
+    align-items: flex-end;
+}
+  
+.last_ticket_settlement {
+    font-size: 20px;
+}
+  
+.last_ticket_station {
+    font-size: 16px;
+    color: #928F94;
+    width: min-content
+}
+  
+.last_ticket_settlement,
+.last_ticket_station {
+    display: block;
+}
+  
+.end_point {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    text-align: end;
+}
+  
+.last_ticket_price {
+    margin-bottom: -8px;
+}
+  
+.price_from,
+.currency {
+    color: #928F94;
+}
+  
+.last_ticket_price_value {
+    color: #FFA800;
+    font-weight: 700;
+}
+  
+.last_ticket_price_value,
+.last_ticket_currency {
+    font-size: 36px;
+}

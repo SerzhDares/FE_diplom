@@ -1,0 +1,59 @@
+.wagon_type_choosing {
+    border-top: 1px dotted #C4C4C4;
+}
+  
+.wagon_types_container {
+    display: flex;
+    padding-bottom: 20px;
+}
+  
+.ticket_wagon-type {
+    padding: 10px 35px;
+    text-align: center;
+    color: #928F94;
+    width: 25%;
+}
+  
+.wt_radio {
+    position: relative;
+    cursor: pointer;
+}
+  
+.wt_radio_input {
+    appearance: none;
+    position: relative;
+    width: 129px;
+    height: 102px;
+    margin: 0;
+}
+  
+.wt_radio_input:checked + .wt_content > .ticket_wagon-type_text {
+    color: #FFA800;
+}
+  
+.wt_radio_input:checked + .wt_content svg {
+    fill: #FFA800;
+}
+  
+.wt_content {
+    position: absolute;
+    bottom: 6px;
+}
+  
+.ticket_wagon-type svg {
+    fill: #C4C4C4;
+}
+  
+.ticket_wagon-type_text {
+    display: block;
+    font-size: 24px;
+    margin-top: 20px;
+}
+  
+.ticket_wagon-type_active {
+    color: #FFA800;
+}
+  
+.ticket_wagon-type_active svg {
+    fill: #FFA800;
+}

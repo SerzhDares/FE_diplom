@@ -1,0 +1,35 @@
+.header_bottom-block_trains {
+    display: block;
+}
+  
+.header__form_trains {
+    padding-top: 35px !important;
+}
+ 
+.form_inputs_container  {
+    display: flex;
+}
+  
+.form-inputs_trains {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 45px !important;
+}
+  
+.form__input_trains,
+.date-inputs_trains input {
+    margin-bottom: 0 !important;
+    max-width: 296px;
+}
+  
+.trains_backwards_btn {
+    margin-bottom: 15px;
+}
+  
+.trains-date_title_input {
+    margin-left: 35px;
+}
+  
+.trains_search_btn {
+    max-width: 296px;
+}

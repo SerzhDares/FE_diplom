@@ -1,0 +1,22 @@
+.available_wagons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 35px;
+    background-color: #FFD98F;
+    font-size: 16px;
+}
+  
+.wagon_number {
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+}
+  
+.wagon_number_active {
+    color: #FFF;
+}
+  
+.numbering_direction {
+    font-size: 16px;
+}

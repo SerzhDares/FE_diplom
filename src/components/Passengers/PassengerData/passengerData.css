@@ -1,0 +1,270 @@
+.passenger_data {
+    border: 1px solid #C4C4C4;
+    box-shadow: 0px 2px 2px 0px #00000040;
+    width: 920px;
+    margin-bottom: 45px;
+}
+  
+.passenger_data_title {
+    background-color: #F9F9F9;
+    padding: 35px 40px 35px 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_passenger {
+    background-color: #FFF;
+}
+
+.pd_title_close {
+    background-color: #FFF;
+}
+  
+.pd_title_block {
+    display: flex;
+}
+  
+.passenger_data_title_text {
+    font-size: 30px;
+    color: #292929;
+}
+  
+.passenger_data_btn {
+    margin-right: 15px;
+}
+  
+.passenger_data_btn,
+.delete_passenger_btn,
+.add_passenger_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+  
+.passenger_data_main {
+    background-color: #FFF;
+    border-top: 1px dashed #928F94
+}
+  
+.about_passenger {
+    padding: 40px 35px 0;
+}
+
+.age_variants_selector,
+.doc_variants_selector {
+    position: relative;
+}
+  
+.variant_select {
+    margin-bottom: 45px;
+    cursor: pointer;
+    background: url('/src/images/select_arrow.svg') no-repeat;
+    background-position: right 10px center;
+    display: flex;
+    align-items: center;
+    /* -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; */
+}
+
+.select_options {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 270px;
+    background-color: #F4F3F6;
+    font-size: 24px;
+    border-radius: 5px;
+    display: none;
+}
+
+.doc_options {
+    width: 300px;
+    font-size: 20px;
+    top: 28px;
+}
+
+.select_option {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.select_option:nth-child(n+2) {
+    border-top: 1px solid #C4C4C4;
+}
+
+.select_option:hover {
+    background-color: #FFCA62;
+    color: #FFF;
+}
+  
+.variant_select,
+.pd_item-input,
+.sb_item_birthday input {
+    width: 270px;
+    height: 50px;
+    font-size: 24px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #928F94;
+}
+
+.doc_select {
+    width: 300px;
+    font-size: 18px;
+}
+  
+.full_name_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+  
+.pd_item_title {
+    display: block;
+    font-size: 16px;
+    color: #928F94;
+    margin-bottom: 10px;
+}
+
+.fn_item-input {
+    text-transform: capitalize;
+}
+
+.error-text {
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #FF3D00C2;
+}
+  
+.sex_birthday_container {
+    display: flex;
+    margin-bottom: 45px;
+}
+  
+.sb_item {
+    margin-right: 30px;
+}
+
+.sb_item_birthday input {
+    width: 240px;
+}
+  
+.check_sex_container {
+    width: 201px;
+    height: 50px;
+    display: flex;
+    border: 1px solid #928F94;
+    border-radius: 5px;
+}
+
+.sex-radio {
+    position: relative;
+}
+
+.sex-radio_input {
+    appearance: none;
+    position: relative;
+    width: 99px;
+    height: 48px;
+    margin: 0;
+}
+
+.sex-radio_input_male {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.sex-radio_input_female {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-left: 1px;
+}
+
+.sex-radio_input:checked {
+    background: #FFA800;
+}
+  
+.check_sex {
+    position: absolute;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    height: 100%;
+    width: 100px;
+    padding-top: 7px;
+    cursor: pointer;
+}
+
+.check_sex_male {
+    border-right: 1px solid #928F94;
+}
+ 
+.check_sex_male,
+.check_sex_female {
+    left: 0;
+}
+  
+.limited_mobility_container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+  
+.lm_checkbox {
+    width: 28px;
+    height: 28px;
+    margin-right: 20px;
+    accent-color: #FFA800;
+}
+  
+.lm_text {
+    font-size: 18px;
+    color: #292929;
+}
+  
+.document_container {
+    display: flex;
+    padding: 40px 35px 35px;
+    border-top: 1px dashed #928F94;
+    border-bottom: 1px dashed #928F94;
+}
+  
+.document_item {
+    margin-right: 35px;
+}
+  
+.doc_type_select {
+    font-size: 18px;
+}
+  
+.doc_input {
+    width: 200px;
+}
+
+.bc_input {
+    text-transform: uppercase;
+}
+
+.doc_option {
+    width: 320px;
+}
+  
+.next-passenger_container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 35px 35px 30px;
+}
+  
+.next-pass_btn {
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.passenger_data_btn:hover svg circle {
+    stroke: transparent;
+}
+
+.success-passenger_data {
+    background-color: #B2F6A1;
+}

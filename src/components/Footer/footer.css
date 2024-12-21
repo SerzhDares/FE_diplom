@@ -1,0 +1,125 @@
+.footer {
+    background-color: #2D2B2F;
+    padding-top: 50px;
+  }
+  
+  .footer_top {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .connection_title {
+    display: block;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  
+  .connection_part {
+    background-repeat: no-repeat;
+    padding-left: 65px;
+    margin-bottom: 30px;
+  }
+  
+  .connection_part_link {
+    color: #E5E5E5;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  .phone_part {
+    background-image: url('/src/images/phone_icon.svg');
+  }
+  
+  .mail_part {
+    background-image: url('/src/images/mail_icon.svg');;
+  }
+  
+  .skype_part {
+    background-image: url('/src/images/skype_icon.svg');;
+  }
+  
+  .geo_part {
+    background-image: url('/src/images/geo_icon.svg');
+    font-style: normal;
+  }
+  
+  .subscription {
+    margin-left: 280px;
+  }
+  
+  .subscribe_form {
+    margin-bottom: 45px;
+  }
+  
+  .subscribe_input_title {
+    font-size: 24px;
+    color:#E5E5E5;
+    margin-bottom: 15px;
+  }
+  
+  .subscribe_input {
+    width: 450px !important;
+    text-transform: none !important;
+    margin-right: 30px;
+    margin-bottom: 0 !important;
+  }
+  
+  .subscribe_btn {
+    height: 60px;
+    border-color: #E5E5E5;
+    border-radius: 3px;
+    color: #E5E5E5;
+    font-weight: 400;
+    padding: 10px 15px;
+  }
+  
+  .socials_list {
+    display: flex;
+    padding-left: 0;
+  }
+  
+  .socials_list-item {
+    list-style-type: none;
+    height: 30px;
+    background-repeat: no-repeat;
+    margin-right: 50px;
+  }
+  
+  .socials_link svg {
+    fill: #E5E5E5;
+  }
+  
+  .socials_link:hover svg {
+    fill: #FFCA62;
+  }
+  
+  .footer_bottom {
+    border-top: 1px solid #E5E5E5;
+    padding-top: 25px;
+    padding-bottom: 35px;
+  }
+  
+  .footer_bottom_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer_logo {
+    padding: 0 !important;
+  }
+  
+  .footer_btn {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+  
+  .footer_last_text {
+    font-size: 24px;
+    font-weight: 300;
+    color: #E5E5E5;
+  }

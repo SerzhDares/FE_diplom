@@ -1,0 +1,87 @@
+.pay_pd_title {
+    padding-left: 35px;
+}
+  
+.pay_personal_data {
+    padding-bottom: 50px;
+}
+  
+.pay_item_title {
+    color: #292929;
+}
+
+.pd_item_contact {
+    margin-bottom: 40px;
+}
+  
+.contact_input {
+    width: 340px;
+}
+  
+.pay_methods_title,
+.pay_method_container  {
+    border-top: 1px dashed #928F94;
+}
+  
+.pay_method_container {
+    padding: 50px 35px 65px;
+    color: #928F94;
+    font-size: 24px;
+}
+  
+.pay_method_variant {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+  
+.pay_method_check {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #928F94;
+    margin-right: 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    border-radius: 5px;
+}
+  
+.pay_method_check::after {
+    content: "\2714";
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    width: 0px;
+    height: 0px;
+    font-size: 26px;
+    overflow: hidden;
+    color: #FFA800;
+}
+  
+.pay_method_check:checked {
+    border-color: #FFA800;
+}
+  
+.pay_method_check:checked + .pay_method_text {
+    color: #FFA800;;
+}
+  
+.pay_method_check:checked::after {
+    width: 28px;
+    height: 28px;
+}
+  
+.online_pay_variants {
+    display: flex;
+}
+  
+.online_pay_variant {
+    color: #000;
+    font-weight: 700;
+    margin-right: 75px;
+}
+  
+.buy_btn {
+    padding: 15px 60px;
+}

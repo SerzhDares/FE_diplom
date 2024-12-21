@@ -1,0 +1,122 @@
+.wagon_scheme {
+    display: flex;
+    padding: 0 15px 0 20px;
+}
+  
+.coupes_scheme {
+    margin-bottom: 24px;
+}
+  
+.coupes_places {
+    display: flex;
+    width: fit-content;
+}
+  
+.coupes_top-places,
+.luxe-places {
+    border-top: 4px solid #999;
+}
+  
+.coupes_places,
+.coupe_places {
+    border-left: 2px solid #999;
+    border-right: 2px solid #999;
+}
+  
+.coupe_places {
+    width: 83px;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.place_btn {
+    width: 25px;
+    border: none;
+    background-color: #f2f2f2;
+    padding: 8px 5px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+  
+.bottom_place_btn,
+.side-places {
+    border-bottom: 4px solid #999;
+}
+  
+.place-unavailable_btn {
+    color: #FFF;
+    background-color: #cdcdcd;
+    cursor: not-allowed;
+}
+  
+.side-places {
+    height: 29px;
+}
+  
+.coupe_side-places {
+    display: flex;
+    align-items: flex-end;
+    height: 25px;
+}
+  
+.no-side-places {
+    border-top: 1px solid #efefef;
+    height: 18px;
+    width: 100%;
+}
+  
+.side-place_btn {
+    width: 50%;
+    padding: 5px 10px;
+}
+  
+.luxe-place_btn {
+    padding: 41px 5px 5px;
+}
+  
+.seats_scheme {
+    border-left: 4px solid #999;
+    border-right: 4px solid #999;
+    padding-bottom: 16px;
+    margin-bottom: 0;
+}
+  
+.seat-places {
+    border-top: 4px solid #999;
+    justify-content: space-between;
+    width: 100%;
+    padding: 7px 5px 3px;
+}
+  
+.top-seat-places {
+    margin-top: 1px;
+}
+  
+.seat-place_btn {
+    height: 19px;
+    padding: 3px 5px;
+}
+  
+.seat-place_btn:nth-child(n+2) {
+    margin-left: 16px;
+}
+  
+.center-seat-places,
+.bottom-seat-places {
+    border-top: none;
+    padding-top: 1px;
+}
+  
+.passage-seat-places {
+    border: none;
+    padding: 7px 50px 3px;
+}
+  
+.bottom-seat-places {
+    border-bottom: 4px solid #999;
+    border-right: 4px solid #999;
+    margin-bottom: 3px;
+    padding-left: 9px;
+    padding-bottom: 7px;
+}

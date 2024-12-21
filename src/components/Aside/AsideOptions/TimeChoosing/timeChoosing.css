@@ -1,0 +1,42 @@
+.time_choosing {
+    padding: 30px 35px 35px 30px;
+    background-repeat: no-repeat;
+    background-position-x: 32px;
+    background-position-y: 35px;
+}
+  
+.time_choosing_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.time_choosing_there {
+    background-image: url('/src/images/there_icon.svg');
+}
+  
+.time_choosing_back {
+    background-image: url('/src/images/back_icon.svg');
+}
+  
+.time_choosing_text {
+    font-size: 30px;
+    font-weight: 700;
+    padding-left: 50px;
+}
+  
+.more_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 7px;
+}
+  
+.more_btn svg {
+    stroke: #fff;
+}
+  
+.more_btn:hover svg {
+    stroke:#FFCA62
+}

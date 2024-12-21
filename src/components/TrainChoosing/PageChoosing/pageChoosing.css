@@ -1,0 +1,45 @@
+.tickets_page_choosing {
+    display: flex;
+    margin-bottom: 100px;
+    margin-top: 145px;
+    justify-content: flex-end;
+}
+  
+.choosing_page_btn {
+    background-color: transparent;
+    border: 2px solid #C4C4C4;
+    border-radius: 5px;
+    color: #928F94;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 20px 30px;
+    margin-left: 35px;
+    width: 85px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+  
+.choosing_page_btn:hover {
+    border-color: #FFA800;
+    color: #FFA800;
+}
+  
+.page_btn_arrow svg {
+    fill: #928F94
+}
+  
+.page_btn_arrow:hover svg {
+    fill: #FFA800
+}
+  
+.active_page_btn {
+    background-color: #FFA800;
+    color: #FFF;
+    border-color: #FFA800;
+}
+  
+.active_page_btn:hover {
+    color: #FFF
+}

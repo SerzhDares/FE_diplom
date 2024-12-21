@@ -1,0 +1,32 @@
+.places_choosing_title {
+    color: #292929;
+}
+  
+.places_choosing_params {
+    width: 910px;
+    background-color: #FFF;
+    border: 1px solid #C4C4C4;
+    box-shadow: 0px 2px 2px 0px #00000040;
+    margin-bottom: 30px;
+    padding-bottom: 80px;
+}
+  
+.choose_other {
+    display: flex;
+    padding: 35px 20px;
+    width: 100%;
+}
+  
+.choose_other_back {
+    justify-content: flex-end;
+}
+  
+.choose_other_img {
+    margin-right: 10px;
+}
+
+.ticket_options_title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 20px;
+}

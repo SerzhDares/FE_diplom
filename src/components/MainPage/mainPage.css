@@ -1,0 +1,12 @@
+.header_title {
+    font-weight: 100;
+    font-size: 72px;
+    margin-left: 60px;
+}
+
+.header_bottom-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  

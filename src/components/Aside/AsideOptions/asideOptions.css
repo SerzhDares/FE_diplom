@@ -1,0 +1,78 @@
+.aside_block {
+    width: 364px;
+    margin-right: 70px;
+    height: fit-content;
+}
+  
+.aside_block_item {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.options {
+    background-color: #3E3C41;
+    padding: 45px 0 0;
+    color:#fff;
+    margin-bottom: 95px;
+}
+  
+.options_dates {
+    padding-left: 30px;
+    padding-right: 35px;
+}
+  
+.options_date {
+    margin-bottom: 30px;
+}
+  
+.options_title {
+    font-weight: 400;
+}
+  
+.options_input_date,
+.options_dates input {
+    width: 295px;
+    height: 43px;
+    background-size: 20px;
+}
+
+.wagon_options {
+    padding: 30px 35px 0 30px;
+}
+  
+.wagon_option {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 35px;
+    background-repeat: no-repeat;
+    padding-left: 90px;
+    background-position-x: 38px;
+}
+  
+.wagon_coupe {
+    background-image: url("/src/images/coupe.svg");
+}
+  
+.wagon_standard {
+    background-image: url("/src/images/standard.svg");
+}
+  
+.wagon_seat {
+    background-image: url("/src/images/seat.svg");
+}
+  
+.wagon_luxe {
+    background-image: url("/src/images/luxe.svg");
+}
+  
+.wagon_wifi {
+    background-image: url("/src/images/wifi.svg");
+}
+  
+.wagon_express {
+    background-image: url("/src/images/express.svg");
+}
+
+.tickets_cost {
+    padding: 35px 35px 55px 30px;
+}

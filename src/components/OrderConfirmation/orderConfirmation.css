@@ -1,0 +1,56 @@
+.data_for_confirmation {
+    width: 920px;
+}
+  
+.confirmation_title {
+    padding: 30px;
+    background-color: #FFF;
+    border: 1px solid #C4C4C4;
+    border-bottom: 1px solid #928F94
+}
+  
+.change_ticket_btn {
+    padding: 5px 53px !important;
+    margin-top: 15px;
+}
+  
+.confirm_page_container {
+    display: flex;
+    background-color: #FFF;
+    border: 1px solid #C4C4C4;
+    box-shadow: 0px 2px 2px 0px #00000040;
+    margin-bottom: 45px;
+}
+  
+.confirm_passengers_info {
+    width: 71%;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+  
+.confirm_price {
+    width: 29%;
+    border-left: 1px dashed #E5E5E5;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+  
+.confirm_price_text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+  
+.confirm_total_price {
+    font-size: 30px;
+}
+  
+.confirm_pay_info {
+    padding: 30px 30px 60px;
+}
+  
+.confirm_pay_method {
+    font-size: 24px;
+}

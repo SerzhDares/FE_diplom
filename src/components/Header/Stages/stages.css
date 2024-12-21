@@ -1,0 +1,85 @@
+.stages_container {
+    background: linear-gradient(to right,  #FFA800 0%,#FFA800 50%,#3E3C41 50%,#3E3C41 100%);
+    color: #FFF;
+}
+  
+.stages {
+    display: flex;
+    justify-content: space-between;
+    font-size: 30.5px;
+    font-weight: 700;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+  
+.stage {
+    padding: 35px 0 35px 45px;
+    width: 100%;
+    background-color: #3E3C41;
+    background-image: url("/src/images/ellipse.svg");
+    background-repeat: no-repeat;
+    background-position: 26px;
+    position: relative;
+}
+  
+.tickets_stage {
+    background-color: #FFA800;
+}
+  
+.tickets_stage:before,
+.passengers_stage:before,
+.pay_stage:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 53px solid #3E3C41;
+    border-left: 40px solid #FFA800;
+    border-bottom: 53px solid #3E3C41;
+    width: 0;
+}
+  
+.stage_border-top,
+.stage_border-bottom {
+    border-right: 1px solid #E5E5E5;
+    position: absolute;
+}
+  
+.stage_border-top {
+    height: 73px;
+    -moz-transform: skew(38deg);
+    -webkit-transform: skew(38deg);
+    transform: skew(37deg);
+    left: 96.2%;
+    bottom: 30%;
+}
+  
+.stage_border-bottom {
+    height: 70px;
+    -moz-transform: skew(-38deg);
+    -webkit-transform: skew(-38deg);
+    transform: skew(-38deg);
+    left: 96%;
+}
+  
+.stage_none-border {
+    border: none;
+}
+  
+.stage_name {
+    padding-left: 40px;
+}
+
+.stage_prev:before {
+    border-left: none;
+  }
+  
+.passengers_stage,
+.pay_stage,
+.check_stage {
+    background-color: #FFA800;
+}
+
+.orange_stages_container {
+    background: linear-gradient(to right,  #FFA800 0%,#FFA800 100%);
+}

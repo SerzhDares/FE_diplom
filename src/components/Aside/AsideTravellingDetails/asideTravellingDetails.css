@@ -1,0 +1,126 @@
+.details_aside_block {
+    background-color: #3E3C41;
+    color:#fff;
+}
+
+.details_title {
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    padding: 35px;
+    text-transform: uppercase;
+    color: #E5E5E5;
+}
+
+.travel_date {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+  
+.travel_info {
+    margin-top: 50px;
+    padding-bottom: 25px;
+    display: none;
+}
+  
+.ti_text_block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+  
+.ti_text_option {
+    font-size: 18px;
+    color: #E5E5E5;
+}
+  
+.ti_text_number {
+    font-size: 24px;
+    font-weight: 500;
+}
+  
+.ti_text_route {
+    font-size: 16px;
+    font-weight: 700;
+}
+  
+.ti_text_route,
+.arrival_time_text,
+.details_end_point {
+    text-align: end;
+}
+  
+.tda_details {
+    margin-top: 67px;
+    margin-bottom: 20px !important;
+}
+  
+.ti_travel_date {
+    padding-right: 0;
+    color: #928F94;
+}
+  
+.tt_details {
+    margin-bottom: 30px;
+}
+  
+.tt_value_details {
+    display: block;
+    margin-top: -22px;
+}
+  
+.details_points {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.details_station {
+    width: min-content;
+}
+  
+.details_settlement,
+.details_station {
+    display: block;
+}
+
+.passengers_info {
+    background-image: url("/src/images/orange_human_icon.svg");
+    padding-bottom: 25px;
+}
+  
+.passengers_travel_info {
+    margin-top: 35px;
+    padding-bottom: 0;
+}
+  
+.details_price_value {
+    color: #FFF !important;
+}
+  
+.total_text_block {
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+  
+.ti_text_total {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+  
+.total_price {
+    color: #FFA800;
+    font-weight: 700;
+}
+  
+.total_currency {
+    color: #E5E5E5;
+}
+  
+.total_price,
+.total_currency {
+    font-size: 46px;
+}

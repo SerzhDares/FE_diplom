@@ -1,0 +1,54 @@
+.tickets_quantity_kinds {
+    display: flex;
+    justify-content: space-between;
+    height: 192px;
+    margin-bottom: 50px;
+}
+  
+.tqk_block {
+    padding: 20px 25px;
+    color: #928F94;
+    position: relative;
+}
+  
+.tqk_block:hover {
+    background-color: #F7F6F6;
+    box-shadow: 0px 2px 2px 0px #00000040;
+    cursor: default;
+    color:#000;
+}
+  
+.tqk_input {
+    width: 243px;
+    height: 50px;
+    font-size: 16px;
+    color: #292929;
+    padding: 15px 10px 15px 15px;
+    border-radius: 5px;
+    border: 1px solid #928F94;
+}
+  
+.tqk_input_adult {
+   padding-left: 111px;
+}
+  
+.tqk_input_child {
+    padding-left: 98px;
+ }
+  
+.tqk_input_child_no-place {
+    padding-left: 197px;
+}
+  
+.tqk_input_text {
+    position: absolute;
+    font-size: 17px;
+    color: #292929;
+    left: 38px;
+    top: 34px;
+}
+  
+.tqk_text {
+    font-size: 16px;
+    margin-top: 20px;
+}

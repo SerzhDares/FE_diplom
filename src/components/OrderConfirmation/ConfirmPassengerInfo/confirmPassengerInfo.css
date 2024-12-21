@@ -1,0 +1,39 @@
+.confirm_passenger_info {
+    padding: 30px;
+    display: flex;
+}
+  
+.confirm_passenger_info:nth-child(n+2) {
+    border-top: 1px dashed #E5E5E5;
+}
+  
+.passenger_type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 45px;
+    width: 15%;
+}
+  
+.confirm_passenger_icon {
+    width: 68px;
+    height: 68px;
+}
+  
+.passenger_type_title {
+    display: block;
+    font-size: 18px;
+    margin-top: 20px;
+}
+  
+.passenger_data_confirm_text {
+    color: #928F94;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+}
+  
+.pd_confirm_text_title {
+    color: #292929;
+    margin-bottom: 15px;
+}

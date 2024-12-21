@@ -1,0 +1,44 @@
+.train_time_info,
+.tti_block {
+  display: flex;
+  align-items: center;
+}
+
+.tti_block {
+  padding: 15px 35px;
+}
+
+.train_time_info {
+  background-color: #F7F6F6;
+  margin-bottom: 40px;
+}
+
+.train_info {
+ padding-right: 10px;
+}
+
+.train_info_img {
+  margin-right: 27px;
+}
+
+.time_info {
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
+}
+
+.time_info_img {
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.time_info_station {
+  max-width: max-content;
+}
+
+.duration_info_img {
+  margin-right: 10px;
+}
+
+.duration_info_text {
+  font-size: 18px;
+}

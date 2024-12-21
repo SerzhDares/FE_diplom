@@ -1,0 +1,56 @@
+.reviews {
+    padding-top: 150px;
+    padding-bottom: 200px;
+}
+  
+.reviews_container {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+  
+.review {
+    display: flex;
+    width: calc(50% - 85px);
+}
+  
+.review:nth-child(n+2) {
+    margin-left: 85px;
+}
+  
+.review_photo {
+    margin-right: 35px;
+}
+  
+.review_title {
+    font-size: 24px;
+    font-weight: 500;
+}
+  
+.review_text {
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: #928F94;
+    line-height: 21px;
+    position: relative;
+}
+  
+.review_text::before,
+.review_text::after {
+    font-size: 36px;
+    font-weight: 500;
+    position: absolute;
+}
+  
+.review_text::before {
+    content: "“";
+    left: -20px;
+}
+  
+.review_text::after {
+    content: "”";
+    bottom: -20px;
+    left: 200px;
+}

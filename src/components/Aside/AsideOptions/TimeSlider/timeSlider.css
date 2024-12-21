@@ -1,0 +1,47 @@
+.time_slider_block {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: none;
+}
+
+.time_slider_title_block {
+    display: flex;
+}
+
+.tstb_arrival {
+    justify-content: flex-start;
+}
+  
+.tstb_departure {
+    justify-content: flex-end;
+    margin-top: 50px;
+}
+
+.time_slider_title {
+    font-size: 24px;
+    color: #E5E5E5;
+    margin-bottom: 20px;
+}
+
+.time-slider__track {
+    height: 10px;
+}
+
+.time-slider__range {
+    height: 8px;
+}
+
+.time-thumb::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+}
+
+.time-thumb::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+}
+
+.time-slider__left-value {
+    left: 0;
+}
+  
