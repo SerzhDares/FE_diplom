@@ -1,6 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/vlqrhtv8nxdhid4m?svg=true)](https://ci.appveyor.com/project/SerzhDares/fe-diploma)
-
-https://serzhdares.github.io/fe_diploma/
+https://serzhdares.github.io/FE_diplom/
 
 # React + TypeScript + Vite
 
