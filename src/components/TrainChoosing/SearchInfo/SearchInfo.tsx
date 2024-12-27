@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { ClickAwayListener } from "@mui/material";
 import './searchInfo.css';
-// import { PagesContext } from "../contexts/PagesContext";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { pagesArrGenerator} from "../../../store/slices/trainsPagesSlice";
 
 interface SearchInfoProps {
     variantsFound: number;
@@ -9,19 +10,7 @@ interface SearchInfoProps {
 
 let pagesQuantityNumber: number;
 
-export let arrPages: number[] = [];
-
-const pagesArrGenerator = () => { //Функция, формирующая массив числа страниц с вариантами поездов
-  for (let i = 1; i <= pagesQuantityNumber; i++) {
-    arrPages.push(i);
-  }
-  console.log(arrPages); //вывод в консоль массива числа страниц
-  return arrPages;
-}
-
 export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
-
-  const [pagesArr, setPagesArr] = useState(arrPages); //хук для изменения состояния массива числа страниц
 
   const [sortValue, setSortValue] = useState('времени');
   const [variants, setVariants] = useState('');
@@ -41,6 +30,9 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
 
   const variantsQuantity = [10, 15];
 
+  const {pages} = useAppSelector(state => state.trainsPages);
+  const dispatch = useAppDispatch();
+
   const activeQuantityVariant = (e: any) => { //функция выбора количества отображаемых вариантов поездов на странице, от значения которой зависит формируемый массив числа страниц
     
     const allNumbers = document.querySelectorAll('.view_number');
@@ -51,14 +43,13 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
     })
     e.target.classList.add('view_number_active');;
     setVariants(e.target.textContent);
+    pages.length = 0;
   }
 
   useEffect(() => {
-    arrPages.length = 0; //очистка массива числа страниц от старых значений
     const viewVariantsQuantity = document.querySelector('.view_number_active')?.textContent;
     pagesQuantityNumber = Math.ceil(variantsFound / Number(viewVariantsQuantity));
-    pagesArrGenerator(); //вызов функции, формирующей массив числа страниц
-    setPagesArr(pagesArr); //изменение состояния массива числа страниц
+    dispatch(pagesArrGenerator(pagesQuantityNumber));
   }, [variants])
 
   return (

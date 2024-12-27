@@ -6,7 +6,6 @@ import { LastTickets } from "../LastTickets/LastTickets";
 import { SearchInfo } from "./SearchInfo/SearchInfo";
 import { Train } from "./Train/Train";
 import { PageChoosing } from "./PageChoosing/PageChoosing";
-// import { PagesContext } from "../contexts/PagesContext";
 
 export const TrainChoosing = () => {
 
@@ -42,13 +41,11 @@ export const TrainChoosing = () => {
               <LastTickets/>
           </aside>
           <main className="tickets_variants">
-            {/* <PagesContext.Provider value={{arrPages, setArrPages}}> */}
               <SearchInfo variantsFound={20}/>
               <div className="tickets">
                 <Train {...trainChoosingParams}/>
               </div>
               <PageChoosing/>
-            {/* </PagesContext.Provider> */}
           </main>
         </div>
       </div>

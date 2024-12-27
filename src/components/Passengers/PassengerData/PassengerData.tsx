@@ -43,7 +43,7 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
   interface FieldsValues {
     surname: string;
     name: string;
-    birthday: Date | null;
+    birthday: string | null;
     series: string;
     passportNumber: string;
     birthCertificate: string;
@@ -52,7 +52,7 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
   const [inputFields, setInputFields] = useState<FieldsValues>({
     surname: "",
     name: "",
-    birthday: null,
+    birthday: (document.getElementById('date') as HTMLInputElement)?.value,
     series: "",
     passportNumber: "",
     birthCertificate: ""

@@ -7,7 +7,7 @@ export const HowItWorks = () => {
       <div className="container">
         <div className="info_title">
           <h2 className="section_title info_title_text">Как это работает</h2>
-          <a href='/#contacts'>
+          <a href='#contacts'>
             <button className="transparent_btn info_btn">Узнать больше</button>
           </a>
         </div>

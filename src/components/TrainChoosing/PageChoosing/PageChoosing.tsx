@@ -1,7 +1,7 @@
 import { PageChoosingBtnNext } from "./PageChoosingBtnNext";
 import { PageChoosingBtnPrev } from "./PageChoosingBtnPrev";
 import "./pageChoosing.css";
-import { arrPages } from "../SearchInfo/SearchInfo"; //импорт массива с числом страниц с вариантами поездов, сформированный в компоненте SearchInfo
+import { useAppSelector } from "../../../hooks";
 
 export const PageChoosing = () => {
   const btnState = (e: any) => {
@@ -13,12 +13,13 @@ export const PageChoosing = () => {
     })
     e.target.classList.add('active_page_btn');
   }
+  
+  const {pages} = useAppSelector(state => state.trainsPages);
 
-  // const arr = [1, 2, 3]
   return (
     <div className="tickets_page_choosing">
         <PageChoosingBtnPrev/>
-        {arrPages.map(page => ( //рендеринг кнопок выбора страницы на основе сформированного массива числа страниц
+        {pages.map(page => ( //рендеринг кнопок выбора страницы на основе сформированного массива числа страниц
           <button key={page} className={
             page == 1 ? "choosing_page_btn active_page_btn" : "choosing_page_btn"} 
             onClick={btnState}>{page}

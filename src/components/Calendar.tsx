@@ -24,7 +24,6 @@ export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass}: Date
       onChange={(date) => setStartDate(date)}
       minDate={minDate}
       id='date'
-      // value={date}
       maxDate={maxDate}
       dateFormat={"dd.MM.yyyy"}
       placeholderText={"ДД/ММ/ГГ"}
