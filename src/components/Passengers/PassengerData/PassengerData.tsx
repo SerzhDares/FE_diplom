@@ -1,10 +1,11 @@
 import './passengerData.css';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { CheckSex } from './CheckSex';
 import { FullName } from './FullName';
 import { ClickAwayListener } from "@mui/material";
 // import { BirthDatePicker } from '../../BirthDatePicker';
 import { Calendar } from '../../Calendar';
+import { FieldsValues } from '../../../validation';
 
 interface PassengerDataProps {
     passengerNumber: number;
@@ -40,19 +41,9 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
     }
   }
 
-  interface FieldsValues {
-    surname: string;
-    name: string;
-    birthday: string | null;
-    series: string;
-    passportNumber: string;
-    birthCertificate: string;
-  }
-
   const [inputFields, setInputFields] = useState<FieldsValues>({
     surname: "",
     name: "",
-    birthday: (document.getElementById('date') as HTMLInputElement)?.value,
     series: "",
     passportNumber: "",
     birthCertificate: ""
@@ -61,29 +52,26 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [patronimyc, setPatronimyc] = useState('');
-//   const [birthday, setBirthday] = useState(null);
+  const [birthday, setBirthday] = useState<Date | null>(null);
   const [series, setSeries] = useState('');
   const [passportNumber, setPassportNumber] = useState('');
   const [birthCertificate, setBirthCertificate] = useState('');
 
+
   const handleChange = (e: any) => {
     const result = e.target.value.replace(/[^а-яА-яёЁ-]/gi, '');
-    if (e.target.id == "name") setName(result);
-    if (e.target.id == "surname") setSurname(result);
-    if (e.target.id == "patronimyc") setPatronimyc(result);
-    if (e.target.id == "date") {
-        // const result = e.target.value.replace(/[^0-9.]/gi, '');
-        // setBirthday(e.target.value);
-    }
-    if (e.target.id == "series" || e.target.id == "passportNumber") {
+    if (e.target.name == "name") setName(result);
+    if (e.target.name == "surname") setSurname(result);
+    if (e.target.name == "patronimyc") setPatronimyc(result);
+    if (e.target.name == "series" || e.target.name == "passportNumber") {
         const result = e.target.value.replace(/[^0-9]/gi, '');
-        e.target.id == "series" ? setSeries(result) : setPassportNumber(result);
+        e.target.name == "series" ? setSeries(result) : setPassportNumber(result);
     }
-    if (e.target.id == "birthCertificate") {
+    if (e.target.name == "birthCertificate") {
         const result = e.target.value.replace(/[^a-zA-Zа-яА-Я0-9]/gi, '');
         setBirthCertificate(result);
     }
-    setInputFields({ ...inputFields, [e.target.id]: e.target.value });
+    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   }
 
   const [errors, setErrors] = useState({
@@ -110,7 +98,7 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
 
     if (!inputValues.surname) errors.surname = "Введите фамилию";
     if (!inputValues.name) errors.name = "Введите имя";
-    if (!inputValues.birthday) errors.birthday = "Введите дату в формате ДД.ММ.ГГГГ";
+    if (!birthday) errors.birthday = "Введите дату в формате ДД.ММ.ГГГГ";
     if (!inputValues.series || inputValues.series.length < 4) {
         docValue == "Паспорт РФ" ? errors.series = "Серия документа должна состоять из 4 цифр" : errors.series = "";
     }
@@ -125,12 +113,12 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
         !errors.series && !errors.passportNumber && !errors.birthCertificate) {
             e.target.parentElement.classList.add('success-passenger_data');
     }
-
     return errors;
   }
 
   const handleSubmit = (e: any) => {
     setErrors(validateValues(e, inputFields));
+    console.log(birthday)
   }
 
   return (
@@ -169,7 +157,7 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
                     <CheckSex/>
                     <div className="sb_item sb_item_birthday" id="birthday">
                         <span className="pd_item_title">Дата рождения</span>
-                        <Calendar minDate={undefined} maxDate={new Date()} monthYearDropdown={true} errorClass={errors.birthday ? "input-error" : ""}/>
+                        <Calendar startDate={birthday} changeDate={(date: Date | null) => setBirthday(date)} minDate={undefined} maxDate={new Date()} monthYearDropdown={true} errorClass={errors.birthday ? "input-error" : ""}/>
                         {errors.birthday ? <p className="error-text">{errors.birthday}</p> : null}
                     </div>
                 </div>
@@ -191,17 +179,17 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
                 </ClickAwayListener>
                 <div className={docValue == "Паспорт РФ" ? "document_item" : "document_item close"}>
                     <span className="pd_item_title">Серия</span>
-                    <input style={{ border: errors.series ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={4} id="series" value={series} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __" onChange={handleChange}/>
+                    <input style={{ border: errors.series ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={4} name="series" value={series} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __" onChange={handleChange}/>
                     {errors.series ? <p className="error-text">{errors.series}</p> : null}
                 </div>
                 <div className={docValue == "Паспорт РФ" ? "document_item" : "document_item close"}>
                     <span className="pd_item_title">Номер</span>
-                    <input style={{ border: errors.passportNumber ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={6} id="passportNumber" value={passportNumber} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __ __ __" onChange={handleChange}/>
+                    <input style={{ border: errors.passportNumber ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={6} name="passportNumber" value={passportNumber} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __ __ __" onChange={handleChange}/>
                     {errors.passportNumber ? <p className="error-text">{errors.passportNumber}</p> : null}
                 </div>
                 <div className={docValue == "Свидетельство о рождении" ? "document_item" : "document_item close"}>
                     <span className="pd_item_title">Номер</span>
-                    <input style={{ border: errors.birthCertificate ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={12} className="pd_item-input doc_input bc_input" id="birthCertificate" value={birthCertificate} placeholder="_ _ _ _ _ _ _ _ _ _ _ _" onChange={handleChange}/>
+                    <input style={{ border: errors.birthCertificate ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={12} className="pd_item-input doc_input bc_input" name="birthCertificate" value={birthCertificate} placeholder="_ _ _ _ _ _ _ _ _ _ _ _" onChange={handleChange}/>
                     {errors.birthCertificate ? <p className="error-text">{errors.birthCertificate}<br/>Пример: VIIIУН256319</p> : null}
                 </div>
             </div>

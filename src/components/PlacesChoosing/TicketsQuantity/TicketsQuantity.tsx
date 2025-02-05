@@ -1,6 +1,7 @@
 import "./ticketsQuantity.css";
 
 export const TicketsQuantity = () => {
+
   return (
     <div className="tickets_quantity">
         <h3 className="ticket_options_title">Количество билетов</h3>

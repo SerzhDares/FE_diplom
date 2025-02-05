@@ -15,7 +15,7 @@ export const WagonInfo = ({wagonNumber}: WagonInfoProps) => {
         <div className="wi_block wi_places">
             <div className="wi_block_title">
                 <span className="wi_block_title-name">Места</span>
-                <span className="wi_places_quantity">11</span>
+                <span className="wi_places_quantity"> 11</span>
             </div>
             <div className="places_type_block">
                 <span className="places_type">Верхние</span>

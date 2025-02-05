@@ -5,25 +5,19 @@ import { AsideTravellingDetails } from "../Aside/AsideTravellingDetails/AsideTra
 import { FullName } from "../Passengers/PassengerData/FullName";
 import { HashLink } from "react-router-hash-link";
 import { useEffect, useState } from "react";
+import { FieldsValues } from "../../validation";
 import "./payment.css";
 
 export const Payment = () => {
 
-  interface PaymentFieldsValues {
-    surname: string;
-    name: string;
-    phoneNumber: string;
-    email: string;
-  }
-
-  const [paymentInputFields, setPaymentInputFields] = useState<PaymentFieldsValues>({
+  const [paymentInputFields, setPaymentInputFields] = useState<FieldsValues>({
     surname: "",
     name: "",
     phoneNumber: "",
     email: "",
   })
 
-  const [errors, setErrors] = useState<PaymentFieldsValues>({
+  const [errors, setErrors] = useState<FieldsValues>({
     surname: "",
     name: "",
     phoneNumber: "",
@@ -38,23 +32,23 @@ export const Payment = () => {
 
   const validateFields = (e: any) => {
     const result = e.target.value.replace(/[^а-яА-яёЁ-]/gi, '');
-    if (e.target.id == "name") setName(result);
-    if (e.target.id == "surname") setSurname(result);
-    if (e.target.id == "patronimyc") setPatronimyc(result);
-    if (e.target.id == "phoneNumber") {
+    if (e.target.name == "name") setName(result);
+    if (e.target.name == "surname") setSurname(result);
+    if (e.target.name == "patronimyc") setPatronimyc(result);
+    if (e.target.name == "phoneNumber") {
         const result = e.target.value.replace(/[^0-9+]/gi, '');
         setPhoneNumber(result);
     }
-    if (e.target.id == "email") {
+    if (e.target.name == "email") {
         const result = e.target.value.replace(/[^A-Za-z0-9@._-]/gi, '');
         setEmail(result);
     }
-    setPaymentInputFields({ ...paymentInputFields, [e.target.id]: e.target.value });
+    setPaymentInputFields({ ...paymentInputFields, [e.target.name]: e.target.value });
   }
 
   const [routeLink, setRouteLink] = useState('');
 
-  const validateValues = (inputValues: PaymentFieldsValues) => {
+  const validateValues = (inputValues: FieldsValues) => {
     
     let errors = {
         surname: "",
@@ -105,12 +99,12 @@ export const Payment = () => {
                                 <FullName nameValue={name} surnameValue={surname} patronimycValue={patronimyc} errSurname={errors.surname} errName={errors.name} titleColorClass={"pay_item_title"} validation={() => validateFields}/>
                                 <div className="pd_item pd_item_contact">
                                     <span className="pd_item_title pay_item_title">Контактный телефон</span>
-                                    <input style={{ border: errors.phoneNumber ? "1px solid #FF3D00C2" : "" }} type="text" id="phoneNumber" className="pd_item-input contact_input" placeholder="+7_ _ _ _ _ _ _ _ _ _" value={phoneNumber} onChange={validateFields}/>
+                                    <input style={{ border: errors.phoneNumber ? "1px solid #FF3D00C2" : "" }} type="text" name="phoneNumber" className="pd_item-input contact_input" placeholder="+7_ _ _ _ _ _ _ _ _ _" value={phoneNumber} onChange={validateFields}/>
                                     {errors.phoneNumber ? <p className="error-text">{errors.phoneNumber}</p> : null}
                                 </div>
                                 <div className="pd_item pd_item_contact">
                                     <span className="pd_item_title pay_item_title">E-mail</span>
-                                    <input style={{ border: errors.email ? "1px solid #FF3D00C2" : "" }} type="text" id="email" className="pd_item-input contact_input" placeholder="inbox@gmail.ru" value={email} onChange={validateFields}/>
+                                    <input style={{ border: errors.email ? "1px solid #FF3D00C2" : "" }} type="text" name="email" className="pd_item-input contact_input" placeholder="inbox@gmail.ru" value={email} onChange={validateFields}/>
                                     {errors.email ? <p className="error-text">{errors.email}</p> : null}
                                 </div>
                             </div>

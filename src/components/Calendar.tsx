@@ -11,17 +11,21 @@ interface DatePickerProps {
   maxDate: Date | undefined;
   monthYearDropdown: boolean;
   errorClass?: string;
+  startDate: Date | null;
+  changeDate: Function;
 }
 
-export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass}: DatePickerProps) => {
+export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass, startDate, changeDate}: DatePickerProps) => {
 
-  const [startDate, setStartDate] = useState<Date | null>(null);
+  // const [startDate, setStartDate] = useState<Date | null>(null);
+  // console.log(startDate);
 
   return (
-    <DatePicker 
+    <DatePicker
       locale="ru" 
-      selected={startDate} 
-      onChange={(date) => setStartDate(date)}
+      selected={startDate}
+      // onChange={(date) => setStartDate(date)}
+      onChange={(date) => changeDate(date)}
       minDate={minDate}
       id='date'
       maxDate={maxDate}
@@ -31,6 +35,6 @@ export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass}: Date
       showMonthDropdown={monthYearDropdown}
       showYearDropdown={monthYearDropdown}
       dropdownMode="select"
-     />
+    />
   );
 };

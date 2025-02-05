@@ -25,6 +25,10 @@ body {
   border: 1px solid #FF3D00C2 !important;
 }
 
+.input-error_bold {
+  border: 3px solid #FF3D00C2 !important;
+}
+
 .header {
   min-height: 100vh;
   background-image: url('images/header_background.png');
@@ -85,7 +89,7 @@ input[type=text]::-webkit-input-placeholder {
 
 .form__input {
   height: 60px;
-  width: 325px;
+  width: 325px !important;
   margin-bottom: 60px;
   border-radius: 3px;
   padding: 20px 40px 17px 20px;
@@ -98,8 +102,30 @@ input[type=text]::-webkit-input-placeholder {
 
 .form__input_geo {
   background-image: url('images/geo_icon.svg');
-
 }
+
+/* кастомизация antd autocomplete */
+
+.ant-select-single {
+  height: 60px;
+  margin-bottom: 60px;
+}
+
+.ant-select-dropdown {
+  text-transform: uppercase;
+}
+
+.ant-select-clear {
+  top: 41% !important;
+  margin-right: 45px;
+}
+
+.anticon-close-circle svg{
+  width: 24px;
+  height: 24px;
+}
+
+/*  */
 
 .form__input_date {
   background-image: url('images/calendar_icon.svg');

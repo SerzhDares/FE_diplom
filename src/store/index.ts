@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import pagesArrGeneratorReducer from "./slices/trainsPagesSlice";
+import searchReducer from "./slices/searchSlice";
 
 const rootReducer = combineReducers({
     trainsPages: pagesArrGeneratorReducer,
+    search: searchReducer,
 });
 
 export const store = configureStore({
