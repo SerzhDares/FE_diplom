@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import { FieldsValues } from "./validation";
+import { useAppSelector } from "./hooks";
 
-export const searchFieldsValidation = () => { //функция для валидации полей, вынес ее отдельно, но не понимаю как связать ее с компонентами (например, MainPage.tsx)
+export const searchFieldsValidation = () => {
 
-  const [dateThere, setDateThere] = useState<Date | null>(null);
-  const [dateBack, setDateBack] = useState<Date | null>(null);
-
-  const [inputFields, setInputFields] = useState<FieldsValues>({
-      pointFrom: "",
-      pointTo: "",
-  })
+  const { departureCity, arrivalCity, thereDate } = useAppSelector(state => state.search);
 
   const [errors, setErrors] = useState({
     pointFrom: "",
@@ -17,13 +11,9 @@ export const searchFieldsValidation = () => { //функция для валид
     date: "",
   });
 
-  const handleChange = (e: any) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
-  };
-
   const [routeLink, setRouteLink] = useState('');
 
-  const validateValues = (inputValues: FieldsValues) => {
+  const validateValues = () => {
       
       let errors = {
         pointFrom: "",
@@ -31,9 +21,9 @@ export const searchFieldsValidation = () => { //функция для валид
         date: "",
       };
 
-      if (!inputValues.pointFrom) errors.pointFrom = "Введите название точки отправления";
-      if (!inputValues.pointTo) errors.pointTo = "Введите название точки назначения";
-      if (!dateThere) errors.date = "Введите дату в формате ДД.ММ.ГГГГ";
+      if (!departureCity.name) errors.pointFrom = "Введите название точки отправления";
+      if (!arrivalCity.name) errors.pointTo = "Введите название точки назначения";
+      if (!thereDate) errors.date = "Введите дату в формате ДД.ММ.ГГГГ";
 
       if (!errors.pointFrom && !errors.pointTo && !errors.date) {
         setRouteLink("/trains#all-trains");
@@ -45,10 +35,10 @@ export const searchFieldsValidation = () => { //функция для валид
   }
 
   useEffect(() => {
-    validateValues(inputFields);
+    validateValues();
   }, [validateValues]);
 
   const handleSubmit = () => {
-    setErrors(validateValues(inputFields));
+    setErrors(validateValues());
   }
 }

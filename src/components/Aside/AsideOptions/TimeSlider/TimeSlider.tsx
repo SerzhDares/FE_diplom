@@ -1,18 +1,34 @@
 import './timeSlider.css';
 import { ChangeEvent, FC, useCallback, useEffect, useState, useRef } from "react";
 import classnames from "classnames";
+import { useAppDispatch } from '../../../../hooks';
+import { changeTimeThereDepartureFrom, 
+        changeTimeThereArrivalFrom, 
+        changeTimeThereDepartureTo, 
+        changeTimeBackDepartureTo, 
+        changeTimeBackDepartureFrom, 
+        changeTimeBackArrivalFrom, 
+        changeTimeThereArrivalTo, 
+        changeTimeBackArrivalTo 
+       } from '../../../../store/slices/trainsParamsSlice';
 
 // Call the props
 interface MultiRangeTimeSliderProps {
     min: number;
     max: number;
     onChange: Function;
+    timeFrom: number;
+    timeTo: number;
+    directionValue: string;
+    timeOf: string;
   }
 
-export const TimeSlider: FC<MultiRangeTimeSliderProps> = ({min, max, onChange}) => {
+export const TimeSlider: FC<MultiRangeTimeSliderProps> = ({min, max, timeFrom, timeTo, directionValue, timeOf, onChange}) => {
 
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+    const dispatch = useAppDispatch();
+
+    const [minVal, setMinVal] = useState(timeFrom);
+    const [maxVal, setMaxVal] = useState(timeTo);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
@@ -53,14 +69,6 @@ export const TimeSlider: FC<MultiRangeTimeSliderProps> = ({min, max, onChange}) 
         onChange({ min: minVal, max: maxVal });
     }, [minVal, maxVal, onChange]);
 
-    // const minTime = (hours, minutes) => {
-    //     hours = Math.floor(minVal/60);
-    //     hours.length == 1 ? hours = '0' + hours : hours;
-    //     minutes = Math.floor((minVal/60 - Math.floor(minVal/60))*60);
-    //     minutes.length == 1 ? minutes = '0' + minutes : minutes;
-    //     return hours + ':' + minutes;
-    // }
-
     const hoursConverter = (value: number) => {
         let minHours: number | string = Math.floor(value/60);
         minHours < 10 ? minHours = '0' + minHours : minHours;
@@ -75,19 +83,45 @@ export const TimeSlider: FC<MultiRangeTimeSliderProps> = ({min, max, onChange}) 
 
     return (
         <div className="slider_container">
-            <input type="range" min={min} max={max} value={minVal} ref={minValRef}
+            <input type="range" step={5} min={min} max={max} value={minVal} ref={minValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     const value = Math.min(+event.target.value, maxVal - 1);
                     setMinVal(value);
-                    event.target.value = value.toString();
+                }}
+                onMouseUp={() => {
+                    if (directionValue == "Туда" && timeOf == "Время отбытия") {
+                        dispatch(changeTimeThereDepartureFrom(minVal));
+                    }
+                    if (directionValue == "Туда" && timeOf == "Время прибытия") {
+                        dispatch(changeTimeThereArrivalFrom(minVal));
+                    }
+                    if (directionValue == "Обратно" && timeOf == "Время отбытия") {
+                        dispatch(changeTimeBackDepartureFrom(minVal));
+                    }
+                    if (directionValue == "Обратно" && timeOf == "Время прибытия") {
+                        dispatch(changeTimeBackArrivalFrom(minVal));
+                    }
                 }}
                 className={classnames("thumb time-thumb thumb--zindex-3", {"thumb--zindex-5": minVal > max - 100})}
             />
-            <input type="range" min={min} max={max} value={maxVal} ref={maxValRef}
+            <input type="range" step={5} min={min} max={max} value={maxVal} ref={maxValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     const value = Math.max(+event.target.value, minVal + 1);
                     setMaxVal(value);
-                    event.target.value = value.toString();
+                }}
+                onMouseUp={() => {
+                    if (directionValue == "Туда" && timeOf == "Время отбытия") {
+                        dispatch(changeTimeThereDepartureTo(maxVal));
+                    }
+                    if (directionValue == "Туда" && timeOf == "Время прибытия") {
+                        dispatch(changeTimeThereArrivalTo(maxVal));
+                    }
+                    if (directionValue == "Обратно" && timeOf == "Время отбытия") {
+                        dispatch(changeTimeBackDepartureTo(maxVal));
+                    }
+                    if (directionValue == "Обратно" && timeOf == "Время прибытия") {
+                        dispatch(changeTimeBackArrivalTo(maxVal));
+                    }
                 }}
                 className="thumb time-thumb thumb--zindex-4"
             />

@@ -39,6 +39,7 @@
 .route_text {
     display: block;
     font-size: 16px;
+    text-transform: capitalize;
     padding-right: 20px;
     width: fit-content;
     background-repeat: no-repeat;
@@ -84,6 +85,11 @@
     font-size: 16px;
     color: #928F94;
     max-width: 120px;
+}
+
+.settlement,
+.station {
+    text-transform: capitalize;
 }
   
 .travel_time {
@@ -206,4 +212,8 @@
   
 .choosing_seats_btn:active {
     box-shadow: none;
+}
+
+.wagon_options_icon:nth-child(n+2) {
+    margin-left: 10px;
 }

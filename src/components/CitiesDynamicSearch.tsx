@@ -1,36 +1,37 @@
 import { SetStateAction, useEffect, useState } from 'react'
 import useDebounce from '../hooks/useDebounce';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { changeSearchFields } from '../store/slices/searchSlice';
+import { changeSearchFieldDep, changeSearchFieldArr } from '../store/slices/searchSlice';
 import { AutoComplete } from 'antd';
 import classNames from 'classnames';
 
 interface citiesSearchI {
     cityFieldError: string;
     cityFieldValidation: string | undefined;
-    cityFieldChange: Function;
     cityFieldName: string;
     cityFieldPlaceholder: string;
     directionClass: string;
 }
 
-export const CitiesDynamicSearch = ({directionClass, cityFieldError, cityFieldValidation, cityFieldChange, cityFieldName, cityFieldPlaceholder}: citiesSearchI) => {
+export const CitiesDynamicSearch = ({
+  directionClass, cityFieldError, 
+  cityFieldValidation, cityFieldName, 
+  cityFieldPlaceholder}: citiesSearchI) => {
 
-
-//     const {departureCity} = useAppSelector(state => state.search.departureCity);
-//     const {arrivalCity} = useAppSelector(state => state.search.arrivalCity)
-
-
-//   useEffect(() => {
-//     if (cityFieldName === "pointFrom" && departureCity) {
-//         setInputValue(departureCity.name);
-//     }
-//     if (cityFieldName === "pointTo" && arrivalCity) {
-//         setInputValue(arrivalCity.name);
-//     }
-//   }, [arrivalCity, departureCity]);
+  const { departureCity, arrivalCity } = useAppSelector(state => state.search);
 
   const [inputValue, setInputValue] = useState<string | undefined>('');
+
+  useEffect(() => {
+    if (cityFieldName === "pointFrom" && departureCity) {
+        setInputValue(departureCity.name);
+    }
+    if (cityFieldName === "pointTo" && arrivalCity) {
+        setInputValue(arrivalCity.name);
+    }
+  }, [arrivalCity, departureCity]);
+
+
   const dynamicSearch = useDebounce(inputValue, 500);
 
   const dispatch = useAppDispatch();
@@ -62,38 +63,53 @@ export const CitiesDynamicSearch = ({directionClass, cityFieldError, cityFieldVa
  }, [dynamicSearch]);
 
 
- const searchHandler = (value: SetStateAction<string | undefined>) => {
+ const searchHandler1 = (value: SetStateAction<string | undefined>) => {
     setInputValue(value);
     if (value === '') {
       dispatch(
-          changeSearchFields({ value: { id: null, name: null } })
+          changeSearchFieldDep({ value: { id: null, name: null } })
       );
     }
   };
 
-  const selectHandler = (data: string) => {
-    console.log(data);
-    console.log(cities);
+  const searchHandler2 = (value: SetStateAction<string | undefined>) => {
+    setInputValue(value);
+    if (value === '') {
+      dispatch(
+          changeSearchFieldArr({ value: { id: null, name: null } })
+      );
+    }
+  };
+
+  const selectHandler1 = (data: string) => {
     const cityName = cities.find((city) => city.value === data)?.label;
     setInputValue(cityName);
     dispatch(
-      changeSearchFields({ value: { id: data, name: cityName } })
+      changeSearchFieldDep({ value: { id: data, name: cityName } })
+   );
+  }
+
+  const selectHandler2 = (data: string) => {
+    const cityName = cities.find((city) => city.value === data)?.label;
+    setInputValue(cityName);
+    dispatch(
+      changeSearchFieldArr({ value: { id: data, name: cityName } })
    );
   }
   
   return (
     <AutoComplete
         options={cities}
-        onSelect={selectHandler}
-        onSearch={searchHandler}
+        onSelect={cityFieldName === "pointFrom" ? selectHandler1 : selectHandler2}
+        onSearch={cityFieldName === "pointFrom" ? searchHandler1 : searchHandler2}
         value={inputValue}
         allowClear
     >
         <input 
             style={{ border: cityFieldError ? "3px solid #FF3D00C2" : "" }} 
             name={cityFieldName} 
-            value={cityFieldValidation} onChange={() => cityFieldChange} 
-            type="text" className={classNames(`form__input form__input_geo ${directionClass}`)} 
+            value={cityFieldValidation} type="text" 
+            className={classNames(`form__input form__input_geo ${directionClass}`)} 
             placeholder={cityFieldPlaceholder}
         />
     </AutoComplete>

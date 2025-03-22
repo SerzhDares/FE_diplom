@@ -1,56 +1,45 @@
-import { useState, useEffect } from "react";
 import { ClickAwayListener } from "@mui/material";
-import './searchInfo.css';
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { pagesArrGenerator} from "../../../store/slices/trainsPagesSlice";
+import { changeOffset, resultsLimit, setCurrentPage, sortResults } from "../../../store/slices/sortViewResultsSlice";
+import './searchInfo.css';
 
 interface SearchInfoProps {
     variantsFound: number;
 }
 
-let pagesQuantityNumber: number;
-
 export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
 
-  const [sortValue, setSortValue] = useState('времени');
-  const [variants, setVariants] = useState('');
+  const variantsQuantity = [5, 10, 15];
+
+  const { limit, sort } = useAppSelector(state => state.sortViewResults);
+  const dispatch = useAppDispatch();
+
+  const activeQuantityVariant = (e: any) => {
+    dispatch(resultsLimit(e.target.textContent));
+  }
 
   const chooseSortVariant = () => {
     document.querySelector('.sort_select')?.classList.toggle('open');
   }
 
+  const selectedSortVariant = (title: string) => {
+    let value;
+    if (title === 'времени') value = 'date';
+    if (title === 'длительности') value = 'duration';
+    if (title === 'стоимости') value = 'price__min';
+    return value;
+  }
+
   const activeSortVariant = (e: any) => {
     document.querySelector('.sort_select')?.classList.remove('open');
-    setSortValue(e.target.textContent);
+    dispatch(sortResults({title: e.target.textContent, value: selectedSortVariant(e.target.textContent)}));
+    dispatch(changeOffset(0));
+    dispatch(setCurrentPage(1));
   }
 
   const hideMenu = () => {
     document.querySelector('.sort_select')?.classList.remove('open');
   }
-
-  const variantsQuantity = [10, 15];
-
-  const {pages} = useAppSelector(state => state.trainsPages);
-  const dispatch = useAppDispatch();
-
-  const activeQuantityVariant = (e: any) => { //функция выбора количества отображаемых вариантов поездов на странице, от значения которой зависит формируемый массив числа страниц
-    
-    const allNumbers = document.querySelectorAll('.view_number');
-    allNumbers.forEach(number => {
-        if (number.classList.contains('view_number_active')) {
-            number.classList.remove('view_number_active');
-        }
-    })
-    e.target.classList.add('view_number_active');;
-    setVariants(e.target.textContent);
-    pages.length = 0;
-  }
-
-  useEffect(() => {
-    const viewVariantsQuantity = document.querySelector('.view_number_active')?.textContent;
-    pagesQuantityNumber = Math.ceil(variantsFound / Number(viewVariantsQuantity));
-    dispatch(pagesArrGenerator(pagesQuantityNumber));
-  }, [variants])
 
   return (
     <div className="search_info">
@@ -59,7 +48,7 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
         </span>
         <ClickAwayListener onClickAway={hideMenu}>
             <span className="sort_by">сортировать по:
-                <span className="sort_variant" onClick={chooseSortVariant}>{sortValue}</span>
+                <span className="sort_variant" onClick={chooseSortVariant}>{sort.title}</span>
                 <div className="sort_select" onClick={activeSortVariant}>
                     <div className="sort_select_item">времени</div>
                     <div className="sort_select_item ssi_center">стоимости</div>
@@ -68,11 +57,12 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
             </span>
         </ClickAwayListener>
         <span className="view_variants">показывать по:
-            <span className="view_number view_number_active" onClick={activeQuantityVariant}>5</span>
             {variantsQuantity.map(variant => (
-                variant <= variantsFound ? 
+              variant == limit ? 
+                <span className="view_number view_number_active" key={variant} onClick={activeQuantityVariant}>{limit}</span> 
+              : variant <= variantsFound ? 
                 <span className="view_number" key={variant} onClick={activeQuantityVariant}>{variant}</span>
-                : <span className="view_number"></span>
+              : <span className="view_number" key={variant}></span>
             ))}
         </span>
     </div>

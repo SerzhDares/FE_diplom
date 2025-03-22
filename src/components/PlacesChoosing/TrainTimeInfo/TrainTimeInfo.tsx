@@ -2,20 +2,19 @@ import "./trainTimeInfo.css";
 
 interface TrainTimeInfoProps {
     trainNumber: string
-    startPoint: string;
     from: string;
     to: string;
     departureTime: string;
     stationFrom: string;
     arrivalTime: string;
     stationTo: string;
-    durationHours: number;
-    durationMinutes: number;
+    durationHours: string;
+    durationMinutes: string;
     directionArrow: string;
 }
 
 export const TrainTimeInfo = ({
-    trainNumber, startPoint, from, to, departureTime, stationFrom, 
+    trainNumber, from, to, departureTime, stationFrom, 
     arrivalTime, stationTo, durationHours, durationMinutes, directionArrow
     }: TrainTimeInfoProps) => {
         
@@ -26,7 +25,6 @@ export const TrainTimeInfo = ({
             <div className="train_info_text">
                 <span className="train_number">{trainNumber}</span>
                 <div className="train_route">
-                    <span className="route_text start_point">{startPoint}</span>
                     <span className="route_text from">{from}</span>
                     <span className="route_text to">{to}</span>
                     <span className="route_text to_station"></span>

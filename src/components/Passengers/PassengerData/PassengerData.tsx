@@ -157,7 +157,14 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
                     <CheckSex/>
                     <div className="sb_item sb_item_birthday" id="birthday">
                         <span className="pd_item_title">Дата рождения</span>
-                        <Calendar startDate={birthday} changeDate={(date: Date | null) => setBirthday(date)} minDate={undefined} maxDate={new Date()} monthYearDropdown={true} errorClass={errors.birthday ? "input-error" : ""}/>
+                        <Calendar 
+                        startDate={birthday} 
+                        changeBirthday={(date: Date | null) => setBirthday(date)} 
+                        clearBirthday={() => setBirthday(null)}
+                        minDate={undefined}
+                        maxDate={new Date()} 
+                        monthYearDropdown={true} 
+                        errorClass={errors.birthday ? "input-error birthday_input" : "birthday_input"}/>
                         {errors.birthday ? <p className="error-text">{errors.birthday}</p> : null}
                     </div>
                 </div>

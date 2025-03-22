@@ -1,18 +1,24 @@
 import './priceSlider.css';
 import { ChangeEvent, FC, useCallback, useEffect, useState, useRef } from "react";
 import classnames from "classnames";
+import { useAppDispatch } from '../../../../hooks';
+import { changeMaxCost, changeMinCost } from '../../../../store/slices/trainsParamsSlice';
 
 // Call the props
 interface MultiRangeSliderProps {
     min: number;
     max: number;
+    priceFrom: number;
+    priceTo: number;
     onChange: Function;
   }
 
-export const PriceSlider: FC<MultiRangeSliderProps> = ({min, max, onChange}) => {
+export const PriceSlider: FC<MultiRangeSliderProps> = ({min, max, priceFrom, priceTo, onChange}) => {
 
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+    const dispatch = useAppDispatch();
+
+    const [minVal, setMinVal] = useState(priceFrom);
+    const [maxVal, setMaxVal] = useState(priceTo);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
@@ -61,20 +67,20 @@ export const PriceSlider: FC<MultiRangeSliderProps> = ({min, max, onChange}) => 
                 <span className="slider_text">до</span>
             </div>
             <div className="slider_container">
-                <input type="range" min={min} max={max} value={minVal} ref={minValRef}
+                <input type="range" step={5} min={min} max={max} value={minVal} ref={minValRef}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         const value = Math.min(+event.target.value, maxVal - 1);
                         setMinVal(value);
-                        event.target.value = value.toString();
                     }}
+                    onMouseUp={() => {dispatch(changeMinCost(minVal))}}
                     className={classnames("thumb thumb--zindex-3", {"thumb--zindex-5": minVal > max - 100})}
                 />
-                <input type="range" min={min} max={max} value={maxVal} ref={maxValRef}
+                <input type="range" step={5} min={min} max={max} value={maxVal} ref={maxValRef}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         const value = Math.max(+event.target.value, minVal + 1);
                         setMaxVal(value);
-                        event.target.value = value.toString();
                     }}
+                    onMouseUp={() => {dispatch(changeMaxCost(maxVal))}}
                     className="thumb thumb--zindex-4"
                 />
                 <div className="slider">

@@ -1,16 +1,28 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface ISearch {
-    departureCity: string,
-    arrivalCity: string,
+    departureCity: {
+        id: string,
+        name: string
+    },
+    arrivalCity: {
+        id: string,
+        name: string
+    },
     thereDate: Date | null,
     backDate: Date | null,
 }
 
 
 const initialState: ISearch = {
-    departureCity: '',
-    arrivalCity: '',
+    departureCity: {
+        id: '',
+        name: ''
+    },
+    arrivalCity: {
+        id: '',
+        name: ''
+    },
     thereDate: null,
     backDate: null,
 }
@@ -19,19 +31,41 @@ export const searchSlice = createSlice({
     name: "search",
     initialState,
     reducers: {
-        changeSearchFields(state, action) {
+        changeSearchFieldDep(state, action) {
             const city = action.payload;
-            console.log(city.value.name);
-            state = city.value;
-            console.log(state)
+            state.departureCity = city.value;
         },
-         swapValues(state) { //не работает, не понимаю как исправить
+        changeSearchFieldArr(state, action) {
+            const city = action.payload;
+            state.arrivalCity = city.value;
+        },
+         swapValues(state) {
             const departure = state.departureCity;
             state.departureCity = state.arrivalCity;
             state.arrivalCity = departure;
          },
+         changeThereDate (state, action) {
+            const date = action.payload.toString();
+            state.thereDate = date;
+         },
+         changeBackDate (state, action) {
+            const date = action.payload.toString();
+            state.backDate = date;
+         },
+         clearThereDate(state) {
+            state.thereDate = null;
+         },
+         clearBackDate(state) {
+            state.backDate = null;
+         }
       },
 })
 
-export const { changeSearchFields, swapValues } = searchSlice.actions;
-export default searchSlice.reducer
+export const { 
+    changeSearchFieldDep, 
+    changeSearchFieldArr, 
+    swapValues, changeThereDate, 
+    changeBackDate, clearThereDate, 
+    clearBackDate 
+} = searchSlice.actions;
+export default searchSlice.reducer;

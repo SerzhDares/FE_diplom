@@ -1,45 +1,80 @@
-.tickets_page_choosing {
-    display: flex;
+/* antd pagination */
+
+.ant-pagination {
     margin-bottom: 100px;
     margin-top: 145px;
-    justify-content: flex-end;
 }
-  
-.choosing_page_btn {
-    background-color: transparent;
-    border: 2px solid #C4C4C4;
-    border-radius: 5px;
-    color: #928F94;
+
+.ant-pagination-item,
+.ant-pagination-prev > button,
+.ant-pagination-next > button {
+    width: 85px !important;
+    height: 75px !important;
+    border: 2px solid #C4C4C4 !important;
+    border-radius: 5px !important;
+    background-color: transparent !important;
+    color: #928F94 !important;
     font-size: 30px;
     font-weight: 700;
-    padding: 20px 30px;
-    margin-left: 35px;
-    width: 85px;
-    height: 75px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    cursor: pointer;
+    padding: 20px 5px;
+    margin-left: 17px;
+    margin-right: 17px !important;
 }
-  
-.choosing_page_btn:hover {
-    border-color: #FFA800;
-    color: #FFA800;
+
+.ant-pagination-item:hover,
+.ant-pagination-prev:hover > button,
+.ant-pagination-next:hover > button {
+    border-color: #FFA800 !important;
+    color: #FFA800 !important;
 }
-  
-.page_btn_arrow svg {
-    fill: #928F94
+
+.ant-pagination-prev svg,
+.ant-pagination-next svg,
+.ant-pagination-item-link-icon svg {
+    width: 30px;
+    height: 30px;
 }
-  
-.page_btn_arrow:hover svg {
-    fill: #FFA800
+
+.ant-pagination-disabled > button {
+    color: #C4C4C4 !important;
 }
-  
-.active_page_btn {
-    background-color: #FFA800;
-    color: #FFF;
-    border-color: #FFA800;
+
+.ant-pagination-disabled:hover > button {
+    border-color: #C4C4C4 !important;
+    color: #C4C4C4 !important;
 }
-  
-.active_page_btn:hover {
-    color: #FFF
+
+.ant-pagination-item > a {
+    color: #928F94 !important;
+    padding: 0 !important;
+}
+
+.ant-pagination-item:hover > a,
+.ant-pagination-item-link-icon {
+    color: #FFA800 !important;
+}
+
+.ant-pagination-item-active {
+    background-color: #FFA800 !important;
+    border-color: #FFA800 !important;
+}
+
+.ant-pagination-item-active > a,
+.ant-pagination-item-active:hover > a {
+    color: #FFF !important;
+}
+
+.ant-pagination-item-link {
+    font-size: 30px;
+}
+
+.ant-pagination-item-ellipsis {
+    top: 65% !important;
+}
+
+.ant-pagination-jump-next,
+.ant-pagination-jump-prev {
+    min-width: 40px !important;
+    margin-inline-end: 0 !important;
+    padding-top: 20px;
 }

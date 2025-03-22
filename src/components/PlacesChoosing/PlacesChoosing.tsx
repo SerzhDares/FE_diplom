@@ -8,23 +8,13 @@ import { TicketsQuantity } from "./TicketsQuantity/TicketsQuantity";
 import { WagonTypeChoosing } from "./WagonTypeChoosing/WagonTypeChoosing";
 import { Footer } from "../Footer/Footer";
 import { HashLink } from "react-router-hash-link";
+import { useAppSelector } from "../../hooks";
+import { trainsTimeFormatter, travelDurationFormatter } from "../../dateTimeFormatter";
 import "./placesChoosing.css";
 
 export const PlacesChoosing = () => {
 
-  const trainTimeInfoParams = {
-    trainNumber: "116C",
-    startPoint: "Адлер",
-    from: "Москва",
-    to: "Санкт-Петербург",
-    departureTime: "00:10",
-    arrivalTime: "09:52",
-    stationFrom: "Курский вокзал",
-    stationTo: "Ладожский вокзал",
-    durationHours: 9,
-    durationMinutes: 42,
-    directionArrow: "src/images/orange_right_arrow.svg"
-  }
+  const { selectedTrain } = useAppSelector(state => state.selectedTrain);
 
   return (
     <>
@@ -43,31 +33,43 @@ export const PlacesChoosing = () => {
                         directionClass={"choose_other_there"} 
                         directionImg={"src/images/choose_other_there.svg"}
                     />
-                    <TrainTimeInfo {...trainTimeInfoParams}/>
-                    <TicketsQuantity/>
-                    <WagonTypeChoosing/>
-                </div>
-                <div className="places_choosing_params">
-                    <ChooseOtherTrain 
-                        directionClass={"choose_other_back"}
-                        directionImg={"src/images/choose_other_back.svg"}
-                    />
-                    <TrainTimeInfo
-                        trainNumber={"116C"}
-                        startPoint={"Адлер"} 
-                        from={"Москва"} 
-                        to={"Санкт-Петербург"}
-                        departureTime={"00:10"}
-                        arrivalTime={"09:52"}
-                        stationFrom={"Курский вокзал"}
-                        stationTo={"Ладожский вокзал"}
-                        durationHours={9}
-                        durationMinutes={42}
-                        directionArrow={"src/images/orange_left_arrow.svg"}
+                    <TrainTimeInfo 
+                        trainNumber={selectedTrain.departure.train.name}
+                        from={selectedTrain.departure.from.city.name}
+                        to={selectedTrain.departure.to.city.name}
+                        departureTime={trainsTimeFormatter(selectedTrain.departure.from.datetime)}
+                        arrivalTime={trainsTimeFormatter(selectedTrain.departure.to.datetime)}
+                        stationFrom={selectedTrain.departure.from.railway_station_name}
+                        stationTo={selectedTrain.departure.to.railway_station_name}
+                        durationHours={travelDurationFormatter(selectedTrain.departure.duration).slice(0, 2)}
+                        durationMinutes={travelDurationFormatter(selectedTrain.departure.duration).slice(3, 5)}
+                        directionArrow={"src/images/orange_right_arrow.svg"}
                     />
                     <TicketsQuantity/>
                     <WagonTypeChoosing/>
                 </div>
+                {selectedTrain.arrival && 
+                  <div className="places_choosing_params">
+                      <ChooseOtherTrain 
+                          directionClass={"choose_other_back"}
+                          directionImg={"src/images/choose_other_back.svg"}
+                      />
+                      <TrainTimeInfo 
+                        trainNumber={selectedTrain.arrival.train.name}
+                        from={selectedTrain.arrival.from.city.name}
+                        to={selectedTrain.arrival.to.city.name}
+                        departureTime={trainsTimeFormatter(selectedTrain.arrival.from.datetime)}
+                        arrivalTime={trainsTimeFormatter(selectedTrain.arrival.to.datetime)}
+                        stationFrom={selectedTrain.arrival.from.railway_station_name}
+                        stationTo={selectedTrain.arrival.to.railway_station_name}
+                        durationHours={travelDurationFormatter(selectedTrain.arrival.duration).slice(0, 2)}
+                        durationMinutes={travelDurationFormatter(selectedTrain.arrival.duration).slice(3, 5)}
+                        directionArrow={"src/images/orange_right_arrow.svg"}
+                      />
+                      <TicketsQuantity/>
+                      <WagonTypeChoosing/>
+                  </div>
+                }
                 <div className="btn_container">
                   <HashLink smooth to="/passengers#passengers-data">
                     <button className="orange_btn next_btn">Далее</button>
