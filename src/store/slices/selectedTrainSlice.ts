@@ -75,7 +75,8 @@ export const selectedTrainSlice = createSlice({
     initialState,
     reducers: {
         selectedTrainOptions(state, action) {
-            state.selectedTrain = action.payload;
+            const { value, direction } = action.payload;
+            state.selectedTrain[direction as keyof typeof initialState.selectedTrain] = value;
         }
     }
 })

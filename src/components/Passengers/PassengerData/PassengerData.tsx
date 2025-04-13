@@ -1,5 +1,5 @@
 import './passengerData.css';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { CheckSex } from './CheckSex';
 import { FullName } from './FullName';
 import { ClickAwayListener } from "@mui/material";

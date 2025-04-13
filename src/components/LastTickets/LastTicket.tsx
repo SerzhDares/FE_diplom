@@ -18,11 +18,11 @@ export const LastTicket = ({
             </div>
         </div>
         <div className="last_ticket_options_price">
-            {/* <img src="src/images/last_ticket_options.svg" alt="options" className="last_ticket_options"/> */}
             <div className="options_block">
                 {haveWifi && <img src="src/images/wifi.svg" alt="wifi" className="wagon_options_icon"/>}
                 {haveConditioner && <img src={haveConditioner ? "src/images/conditioner.svg" : ""} alt="conditioner" className="wagon_options_icon"/>}
                 {isExpress && <img src={isExpress ? "src/images/express.svg" : ""} alt="express" className="wagon_options_icon"/>}
+                <img src="src/images/food.svg" alt="food" className="wagon_options_icon"/>
             </div>
             <div className="last_ticket_price">
                 <span className="price_from last_ticket_price_from">от </span>

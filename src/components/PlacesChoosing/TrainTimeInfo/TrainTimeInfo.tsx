@@ -1,3 +1,4 @@
+import { durationTimeTextFormatter } from "../../../dateTimeFormatter";
 import "./trainTimeInfo.css";
 
 interface TrainTimeInfoProps {
@@ -46,7 +47,10 @@ export const TrainTimeInfo = ({
         </div>
         <div className="tti_block duration_info">
             <img src="src/images/orange_clock.svg" alt="часы" className="duration_info_img"/>
-            <span className="duration_info_text">{durationHours} часов<br/>{durationMinutes} минуты</span>
+            <span className="duration_info_text">
+                {durationHours} {durationTimeTextFormatter(durationHours)[0]}<br/>
+                {durationMinutes} {durationTimeTextFormatter(durationMinutes)[1]}
+            </span>
         </div>
     </div>
   )

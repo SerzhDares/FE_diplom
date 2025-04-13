@@ -18,3 +18,25 @@ export const travelDurationFormatter = (time: any) => {
     const formattedDurationTime = hours + ':' + f_minutes;
     return formattedDurationTime;
 }
+
+export const durationTimeTextFormatter = (time: any) => {
+    let hoursText;
+    let minutesText;
+    if (time.slice(-1) == 1 && time.slice(-2, -1) !== 1) {
+        hoursText = "час"; 
+        minutesText = "минута";
+    }
+    if (time.slice(-1) >= 2 && time.slice(-1) <= 4 && time.slice(-2, -1) !== 1) {
+        hoursText = "часа"; 
+        minutesText = "минуты";
+    }
+    if (time.slice(-1) == 0 || time.slice(-1) >= 5 && time.slice(-1) <= 9) {
+        hoursText = "часов"; 
+        minutesText = "минут";
+    }
+    if (time.slice(-1) >= 1 && time.slice(-1) <= 4 && time.slice(-2, -1) == 1) {
+        hoursText = "часов"; 
+        minutesText = "минут";
+    }
+    return [hoursText, minutesText];
+}

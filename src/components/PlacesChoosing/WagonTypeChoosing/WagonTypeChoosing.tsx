@@ -8,56 +8,98 @@ import { JSX } from "react/jsx-runtime";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { fetchWagonsSeatsInfo, seatsState } from "../../../store/slices/seatsSlice";
 import "./wagonTypeChoosing.css";
+import { WagonInfo } from "../WagonInfo/WagonInfo";
+import { setActiveWagons } from "../../../store/slices/activeWagonsSlice";
 
-export const WagonTypeChoosing = () => {
+interface ITrainWagons {
+    // trainID: string;
+    direction: string;
+}
+
+
+export const WagonTypeChoosing = ({direction}: ITrainWagons) => {
 
   const dispatch = useAppDispatch();
   const { trainWagonsSeats } = useAppSelector(seatsState);
+  const wagonsWithDirection = trainWagonsSeats[direction as keyof typeof trainWagonsSeats];
   const { selectedTrain } = useAppSelector(state => state.selectedTrain);
+  const trainWithDirection = selectedTrain[direction as keyof typeof selectedTrain];
+
 
   useEffect(() => {
     dispatch(
-        fetchWagonsSeatsInfo(
-            `${import.meta.env.VITE_TRAINS_ROUTES}/${selectedTrain.departure._id}/seats`
-        )
+        fetchWagonsSeatsInfo({direction, url:
+            `${import.meta.env.VITE_TRAINS_ROUTES}/${trainWithDirection._id}/seats`
+        })
     );
-    if (selectedTrain.arrival) {
-        dispatch(
-            fetchWagonsSeatsInfo(
-                `${import.meta.env.VITE_TRAINS_ROUTES}/${selectedTrain.arrival._id}/seats`
-            )
-        );
-    }
+    // if (selectedTrain.arrival) {
+    //     dispatch(
+    //         fetchWagonsSeatsInfo(
+    //             `${import.meta.env.VITE_TRAINS_ROUTES}/${selectedTrain.arrival._id}/seats`
+    //         )
+    //     );
+    // }
   }, [])
 
   const [type, setType] = useState("");
-  let wt: JSX.Element;
 
   const activeWagonType = (e: any) => {
     setType(e.target.value);
+    // setTimeout(() => {
+    //     activeWagons;
+    // })
+    // console.log(trainWagonsSeats)
+  }
+
+  let wgns: JSX.Element;
+
+  const trainWagons: any[] = [];
+
+  const wagonsArrFunc = (trainWagons: any, wagon: any) => {
+    trainWagons.push(wagon);
+    // console.log(trainWagons);
+    return trainWagons;
+  }
+
+  const activeWagon = (e: any) => {
+    // const allWagons = document.querySelectorAll('.wagon_number');
+    // allWagons.forEach(wagon => {
+    //     if (wagon.classList.contains('wagon_number_active')) {
+    //         wagon.classList.remove('wagon_number_active');
+    //     }
+    // })
+    let selectedWagon;
+    e.target.classList.add('wagon_number_active');
+    selectedWagon = e.target.textContent;
+    // dispatch(setWagonNumber(wagon.coach.name));
+    console.log(selectedWagon)
+    return selectedWagon;
   }
 
   const wagonSchemeView = () => {
-    if (type == "Сидячий") {
-        wt = <WagonSeatScheme/>
-    }
-    if (type == "Плацкарт") {
-        wt = <WagonStandardScheme/>
-    }
-    if (type == "Купе") {
-        wt = <WagonCoupeScheme/>
-    }
-    if (type == "Люкс") {
-        wt = <WagonLuxeScheme/>
-    }
-    return wt;
+    wagonsWithDirection.map((wagon: any) => {
+        if (type == "Сидячий" && wagon.coach.class_type == "fourth") {
+            wgns = <AvailableWagons key={wagon.coach.train} wagons={wagonsArrFunc(trainWagons, wagon)} direction={direction} coachId={wagon.coach._id} name={wagon.coach.name}/>
+        }
+        if (type == "Плацкарт" && wagon.coach.class_type == "third") {
+            wgns = <AvailableWagons key={wagon.coach.train} wagons={wagonsArrFunc(trainWagons, wagon)} direction={direction} coachId={wagon.coach._id} name={wagon.coach.name}/>
+        }
+        if (type == "Купе" && wagon.coach.class_type == "second") {
+            wgns = <AvailableWagons key={wagon.coach.train} wagons={wagonsArrFunc(trainWagons, wagon)} direction={direction} coachId={wagon.coach._id} name={wagon.coach.name}/>
+        }
+        if (type == "Люкс" && wagon.coach.class_type == "first") {
+            wgns = <AvailableWagons key={wagon.coach.train} wagons={wagonsArrFunc(trainWagons, wagon)} direction={direction} coachId={wagon.coach._id} name={wagon.coach.name}/>
+        }
+        // dispatch(setActiveWagons({direction, data: wagonsWithDirection[0]}));
+    })
+    return wgns;
   }
 
-  const uniqueTypes = trainWagonsSeats.filter((obj, index) => {
-    return index === trainWagonsSeats.findIndex(o => obj.coach.class_type === o.coach.class_type);
+  const uniqueTypes = wagonsWithDirection.filter((obj: any, index: any) => {
+    return index === wagonsWithDirection.findIndex((o: any) => obj.coach.class_type === o.coach.class_type);
   });
 
-  uniqueTypes.sort((a, b) => b.coach.available_seats - a.coach.available_seats);
+  uniqueTypes.sort((a: any, b: any) => b.coach.available_seats - a.coach.available_seats);
 
   return (
     <>
@@ -124,7 +166,6 @@ export const WagonTypeChoosing = () => {
             ))}
         </div>
     </div>
-    {type ? <AvailableWagons wagons={['07', '09']} numInfo={"Нумерация вагонов начинается с головы поезда"}/> : ""}
     {wagonSchemeView()}
     </> 
   )

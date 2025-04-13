@@ -5,6 +5,8 @@ import trainsParamsReducer from "./slices/trainsParamsSlice";
 import  sortViewResultsReducer from "./slices/sortViewResultsSlice";
 import selectedTrainReducer from "./slices/selectedTrainSlice"
 import seatsReducer from "./slices/seatsSlice";
+import passengersQuantityReducer from "./slices/passengersQuantitySlice";
+import activeWagonsReducer from "./slices/activeWagonsSlice";
 
 
 const rootReducer = combineReducers({
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
     sortViewResults: sortViewResultsReducer,
     selectedTrain: selectedTrainReducer,
     seats: seatsReducer,
+    passengersQuantity: passengersQuantityReducer,
+    activeWagons: activeWagonsReducer
 });
 
 export const store = configureStore({

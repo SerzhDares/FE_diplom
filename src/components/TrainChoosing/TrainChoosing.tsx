@@ -64,8 +64,17 @@ export const TrainChoosing = () => {
     })
   }, [url])
 
-  const setTrain = (train: {}) => {
-    dispatch(selectedTrainOptions(train));
+  const setTrain = (train: {departure: {}, arrival: {}}) => {
+    dispatch(selectedTrainOptions({
+      value: train.departure,
+      direction: "departure"
+    }));
+    if (train.arrival) {
+      dispatch(selectedTrainOptions({
+        value: train.arrival,
+        direction: "arrival"
+      }));
+    }
   }
 
   return (

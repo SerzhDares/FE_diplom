@@ -16,15 +16,15 @@ interface ISearch {
 
 const initialState: ISearch = {
     departureCity: {
-        id: '',
-        name: ''
+        id: '67ceb6548c75f00047c8f78d',
+        name: 'москва'
     },
     arrivalCity: {
-        id: '',
-        name: ''
+        id: '67ceb6548c75f00047c8f78e',
+        name: 'санкт-петербург'
     },
-    thereDate: null,
-    backDate: null,
+    thereDate: '2025-03-23',
+    backDate: '2025-04-06',
 }
 
 export const searchSlice = createSlice({

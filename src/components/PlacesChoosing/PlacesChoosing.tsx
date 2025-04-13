@@ -41,12 +41,18 @@ export const PlacesChoosing = () => {
                         arrivalTime={trainsTimeFormatter(selectedTrain.departure.to.datetime)}
                         stationFrom={selectedTrain.departure.from.railway_station_name}
                         stationTo={selectedTrain.departure.to.railway_station_name}
-                        durationHours={travelDurationFormatter(selectedTrain.departure.duration).slice(0, 2)}
-                        durationMinutes={travelDurationFormatter(selectedTrain.departure.duration).slice(3, 5)}
+                        durationHours={Number(selectedTrain.departure.duration)/3600 <= 100 ? 
+                          travelDurationFormatter(selectedTrain.departure.duration).slice(0, 2)
+                          : travelDurationFormatter(selectedTrain.departure.duration).slice(0, 3)
+                        }
+                        durationMinutes={Number(selectedTrain.departure.duration)/3600 <= 100 ? 
+                          travelDurationFormatter(selectedTrain.departure.duration).slice(3, 5)
+                          : travelDurationFormatter(selectedTrain.departure.duration).slice(4, 6)
+                        }
                         directionArrow={"src/images/orange_right_arrow.svg"}
                     />
-                    <TicketsQuantity/>
-                    <WagonTypeChoosing/>
+                    <TicketsQuantity direction={"departure"}/>
+                    <WagonTypeChoosing direction={"departure"}/>
                 </div>
                 {selectedTrain.arrival && 
                   <div className="places_choosing_params">
@@ -62,12 +68,18 @@ export const PlacesChoosing = () => {
                         arrivalTime={trainsTimeFormatter(selectedTrain.arrival.to.datetime)}
                         stationFrom={selectedTrain.arrival.from.railway_station_name}
                         stationTo={selectedTrain.arrival.to.railway_station_name}
-                        durationHours={travelDurationFormatter(selectedTrain.arrival.duration).slice(0, 2)}
-                        durationMinutes={travelDurationFormatter(selectedTrain.arrival.duration).slice(3, 5)}
+                        durationHours={Number(selectedTrain.arrival.duration)/3600 <= 100 ? 
+                          travelDurationFormatter(selectedTrain.arrival.duration).slice(0, 2)
+                          : travelDurationFormatter(selectedTrain.arrival.duration).slice(0, 3)
+                        }
+                        durationMinutes={Number(selectedTrain.arrival.duration)/3600 <= 100 ? 
+                          travelDurationFormatter(selectedTrain.arrival.duration).slice(3, 5)
+                          : travelDurationFormatter(selectedTrain.arrival.duration).slice(4, 6)
+                        }
                         directionArrow={"src/images/orange_right_arrow.svg"}
                       />
-                      <TicketsQuantity/>
-                      <WagonTypeChoosing/>
+                      <TicketsQuantity direction={"arrival"}/>
+                      <WagonTypeChoosing direction={"arrival"}/>
                   </div>
                 }
                 <div className="btn_container">

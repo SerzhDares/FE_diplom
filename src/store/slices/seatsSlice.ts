@@ -1,27 +1,99 @@
 import { buildCreateSlice, asyncThunkCreator } from "@reduxjs/toolkit";
 
-interface ISeats {
-    trainWagonsSeats: [{
-        coach: {
-            available_seats: number;
-            class_type: string;
-            name: string;
-        };
-        seats: [];
-    }],
-    loading: boolean,
-    error: string
+export interface ISeats {
+    trainWagonsSeats: {
+        departure: [{
+            coach: {
+                available_seats: number;
+                class_type: string;
+                name: string;
+                top_price: number;
+                bottom_price: number;
+                side_price: number;
+                price: number;
+                have_wifi: boolean;
+                have_air_conditioning: boolean;
+                is_linens_included: boolean;
+                linens_price: number;
+                train: string;
+                _id?: string;
+            };
+            seats: [{
+                index: number;
+                available: boolean;
+            }];
+        }],
+        arrival: [{
+            coach: {
+                available_seats: number;
+                class_type: string;
+                name: string;
+                top_price: number;
+                bottom_price: number;
+                side_price: number;
+                price: number;
+                have_wifi: boolean;
+                have_air_conditioning: boolean;
+                is_linens_included: boolean;
+                linens_price: number;
+                train: string;
+                _id?: string;
+            };
+            seats: [{
+                index: number;
+                available: boolean;
+            }];
+        }]
+    },
+    loading?: boolean,
+    error?: string,
 }
 
 const initialState: ISeats = {
-    trainWagonsSeats: [{
-        coach: {
-            available_seats: 0,
-            class_type: "",
-            name: ""
-        },
-        seats: []
-    }],
+    trainWagonsSeats: {
+        departure: [{
+            coach: {
+                available_seats: 0,
+                class_type: "",
+                name: "",
+                top_price: 0,
+                bottom_price: 0,
+                side_price: 0,
+                price: 0,
+                have_wifi: false,
+                have_air_conditioning: false,
+                is_linens_included: false,
+                linens_price: 0,
+                train: "",
+                _id: ""
+            },
+            seats: [{
+                index: 0,
+                available: false
+            }]
+        }],
+        arrival: [{
+            coach: {
+                available_seats: 0,
+                class_type: "",
+                name: "",
+                top_price: 0,
+                bottom_price: 0,
+                side_price: 0,
+                price: 0,
+                have_wifi: false,
+                have_air_conditioning: false,
+                is_linens_included: false,
+                linens_price: 0,
+                train: "",
+                _id: ""
+            },
+            seats: [{
+                index: 0,
+                available: false
+            }]
+        }]
+    },
     loading: false,
     error: ""
 }
@@ -38,15 +110,14 @@ export const seatsSlice = createSliceWithThunk({
     },
     reducers: (create) => ({
         fetchWagonsSeatsInfo: create.asyncThunk(
-            async(url: string, { rejectWithValue }: any) => {
+            async ({url, direction}: any, { rejectWithValue }: any) => {
                 try {
                     const response = await fetch(url);
                     if (!response.ok) {
                         return rejectWithValue("Не удалось загрузить данные");
                     }
                     const data = await response.json();
-                    console.log(data);
-                    return data;
+                    return {data, direction};
                 } catch (err) {
                     return rejectWithValue(err);
                 }
@@ -57,7 +128,8 @@ export const seatsSlice = createSliceWithThunk({
                     state.error = "";
                 },
                 fulfilled: (state, action) => {
-                    state.trainWagonsSeats = action.payload;
+                    const { data, direction } = action.payload;
+                    state.trainWagonsSeats[direction as keyof typeof initialState.trainWagonsSeats] = data;
                     state.error = "";
                 },
                 rejected: (state, action) => {

@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { JSX } from "react/jsx-runtime";
 
 export interface ITrainParams {
     thereTrainNumber?: string;

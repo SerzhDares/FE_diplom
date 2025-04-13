@@ -174,6 +174,7 @@ export const Train = ({
                     {haveWifi && <img src="src/images/wifi_dark.svg" alt="wifi" className="wagon_options_icon"/>}
                     {haveConditioner && <img src={haveConditioner ? "src/images/conditioner_dark.svg" : ""} alt="conditioner" className="wagon_options_icon"/>}
                     {isExpress && <img src={isExpress ? "src/images/express_dark.svg" : ""} alt="express" className="wagon_options_icon"/>}
+                    <img src="src/images/food_dark.svg" alt="food" className="wagon_options_icon"/>
                 </div>
                 <HashLink smooth to={routeLink}>
                     <button onClick={onClick} className={btnType}>{btnText}</button>
