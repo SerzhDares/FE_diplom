@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { GeneralHeader } from "../Header/GeneralHeader";
 import { StagesLine } from "../Header/Stages/StagesLine";
 import { AsideOptions } from "../Aside/AsideOptions/AsideOptions";
@@ -10,11 +11,48 @@ import { Footer } from "../Footer/Footer";
 import { HashLink } from "react-router-hash-link";
 import { useAppSelector } from "../../hooks";
 import { trainsTimeFormatter, travelDurationFormatter } from "../../dateTimeFormatter";
+import { passTypeCounter } from "./WagonSchemes/WagonSeatBtn";
+import classNames from "classnames";
 import "./placesChoosing.css";
+
 
 export const PlacesChoosing = () => {
 
   const { selectedTrain } = useAppSelector(state => state.selectedTrain);
+  const { selectedSeats } = useAppSelector(state => state.selectedSeats);
+  const { passQuantity } = useAppSelector(state => state.passengersQuantity);
+
+  const getRandomHumans = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  const seatsTotalPrice = (direction: string) => {
+    let sum = 0;
+    selectedSeats[direction as keyof typeof selectedSeats].forEach((seat: any) => {
+      sum += seat.seatPrice;
+    })
+    return sum;
+  }
+
+  const nextBtnState = () => {
+    let disabledState = true;
+    const departureConditions = 
+      (+passQuantity["departure"].adults > 0 || +passQuantity["departure"].children > 0) && 
+      (+passQuantity["departure"].adults == passTypeCounter(selectedSeats["departure"])[0] && 
+        +passQuantity["departure"].children == passTypeCounter(selectedSeats["departure"])[1])
+    const arrivalConditions = 
+      (+passQuantity["arrival"].adults > 0 || +passQuantity["arrival"].children > 0) && 
+      (+passQuantity["arrival"].adults == passTypeCounter(selectedSeats["arrival"])[0] && 
+        +passQuantity["arrival"].children == passTypeCounter(selectedSeats["arrival"])[1])
+    if (
+        (departureConditions && !selectedTrain.arrival._id) || 
+        (departureConditions && selectedTrain.arrival._id && arrivalConditions)
+      )
+      {
+        disabledState = false;
+      }
+    return disabledState;
+  }
 
   return (
     <>
@@ -52,9 +90,15 @@ export const PlacesChoosing = () => {
                         directionArrow={"src/images/orange_right_arrow.svg"}
                     />
                     <TicketsQuantity direction={"departure"}/>
-                    <WagonTypeChoosing direction={"departure"}/>
+                    <WagonTypeChoosing direction={"departure"} humansQuantity={useMemo(() => getRandomHumans(5, 20), [])}/>
+                    {selectedSeats.departure.length ?
+                      <div className="seats_total_price">
+                        <span className="seats_total_price_value">{seatsTotalPrice("departure")}</span>
+                        <span className="currency seats_total_price_currency">₽</span>
+                      </div>
+                    : ""}
                 </div>
-                {selectedTrain.arrival && 
+                {selectedTrain.arrival._id &&
                   <div className="places_choosing_params">
                       <ChooseOtherTrain 
                           directionClass={"choose_other_back"}
@@ -79,12 +123,23 @@ export const PlacesChoosing = () => {
                         directionArrow={"src/images/orange_right_arrow.svg"}
                       />
                       <TicketsQuantity direction={"arrival"}/>
-                      <WagonTypeChoosing direction={"arrival"}/>
+                      <WagonTypeChoosing direction={"arrival"} humansQuantity={useMemo(() => getRandomHumans(5, 20), [])}/>
+                      {selectedSeats.arrival.length ?
+                        <div className="seats_total_price">
+                          <span className="seats_total_price_value">{seatsTotalPrice("arrival")}</span>
+                          <span className="currency seats_total_price_currency">₽</span>
+                        </div>
+                      : ""}
                   </div>
                 }
                 <div className="btn_container">
                   <HashLink smooth to="/passengers#passengers-data">
-                    <button className="orange_btn next_btn">Далее</button>
+                    <button 
+                      className={classNames("orange_btn next_btn", nextBtnState() ? "disabled_btn" : "")} 
+                      disabled={nextBtnState()}
+                    >
+                      Далее
+                    </button>
                   </HashLink>
                 </div>
             </main>

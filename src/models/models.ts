@@ -1,5 +1,4 @@
 import { MouseEventHandler } from "react";
-import { JSX } from "react/jsx-runtime";
 
 export interface ITrainParams {
     thereTrainNumber?: string;
@@ -37,4 +36,19 @@ export interface ITrainParams {
     routeLink: string;
     btnText?: string;
     onClick?: MouseEventHandler;
+}
+
+export interface FieldsValues {
+    pointFrom?: string,
+    pointTo?: string,
+    dateThere?: Date | null,
+    dateBack?: Date | null,
+    surname?: string;
+    name?: string;
+    birthday?: Date | null,
+    series?: string;
+    passportNumber?: string;
+    birthCertificate?: string;
+    phoneNumber?: string;
+    email?: string;
 }

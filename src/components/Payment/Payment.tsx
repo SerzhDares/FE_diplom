@@ -5,17 +5,17 @@ import { AsideTravellingDetails } from "../Aside/AsideTravellingDetails/AsideTra
 import { FullName } from "../Passengers/PassengerData/FullName";
 import { HashLink } from "react-router-hash-link";
 import { useEffect, useState } from "react";
-import { FieldsValues } from "../../validation";
+import { FieldsValues } from "../../models/models";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { savePaymentData } from "../../store/slices/paymentSlice";
 import "./payment.css";
 
 export const Payment = () => {
 
-  const [paymentInputFields, setPaymentInputFields] = useState<FieldsValues>({
-    surname: "",
-    name: "",
-    phoneNumber: "",
-    email: "",
-  })
+  const dispatch = useAppDispatch();
+  const { passengers } = useAppSelector(state => state.passengersData);
+  const { paymentData } = useAppSelector(state => state.paymentData);
+  const firstPassenger = passengers["departure"][0];
 
   const [errors, setErrors] = useState<FieldsValues>({
     surname: "",
@@ -24,11 +24,14 @@ export const Payment = () => {
     email: "",
   });
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [patronimyc, setPatronimyc] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(firstPassenger.name ? firstPassenger.name : "");
+  const [surname, setSurname] = useState(firstPassenger.surname ? firstPassenger.surname : "");
+  const [patronimyc, setPatronimyc] = useState(firstPassenger ? firstPassenger.patronimyc : "");
+  const [phoneNumber, setPhoneNumber] = useState(paymentData.phone ? paymentData.phone : "");
+  const [email, setEmail] = useState(paymentData.email ? paymentData.email : "");
+
+  const [paymentMethod, setPaymentMethod] = useState(paymentData.paymentType ? paymentData.paymentType :'Онлайн');
+  const choicePaymentMethod = (e: any) => {setPaymentMethod(e.target.value)}
 
   const validateFields = (e: any) => {
     const result = e.target.value.replace(/[^а-яА-яёЁ-]/gi, '');
@@ -43,12 +46,15 @@ export const Payment = () => {
         const result = e.target.value.replace(/[^A-Za-z0-9@._-]/gi, '');
         setEmail(result);
     }
-    setPaymentInputFields({ ...paymentInputFields, [e.target.name]: e.target.value });
+  }
+    
+  const getRandomOrderNumber = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   const [routeLink, setRouteLink] = useState('');
 
-  const validateValues = (inputValues: FieldsValues) => {
+  const validateValues = ({surname, name, phoneNumber, email}: FieldsValues) => {
     
     let errors = {
         surname: "",
@@ -57,12 +63,17 @@ export const Payment = () => {
         email: "",
     };
 
-    if(!inputValues.surname) errors.surname = "Введите фамилию";
-    if(!inputValues.name) errors.name = "Введите имя";
-    if(!inputValues.phoneNumber || inputValues.phoneNumber.length < 11) errors.phoneNumber = "Введите номер в формате +79123456789";
-    if(!inputValues.email) errors.email = "Введите e-mail";
+    if(!surname) errors.surname = "Введите фамилию";
+    if(!name) errors.name = "Введите имя";
+    if(!phoneNumber || phoneNumber && !((/\+[0-9]{11,15}/).test(phoneNumber))) errors.phoneNumber = "Введите номер в формате +79123456789";
+    if(!email || email && !((/[a-z0-9]+@[a-z]+\.[a-z]{2,4}/).test(email))) errors.email = "Введите корректный e-mail";
 
     if (!errors.surname && !errors.name && !errors.phoneNumber && !errors.email) {
+        dispatch(savePaymentData(
+            {name: name, surname: surname, patronimyc: patronimyc, 
+            phone: phoneNumber, email: email, paymentType: paymentMethod,
+            orderNumber: getRandomOrderNumber(101, 299) + firstPassenger.name[0] + firstPassenger.surname[0]}
+        ))
         setRouteLink("/confirmation#order-confirmation");
     } else {
         setRouteLink("/payment#order-payment");
@@ -72,14 +83,12 @@ export const Payment = () => {
   }
 
   useEffect(() => {
-    validateValues(paymentInputFields);
-  }, [validateFields]);
+    validateValues({surname, name, phoneNumber, email});
+  }, [surname, name, phoneNumber, email]);
 
-  const [paymentMethod, setPaymentMethod] = useState('online');
-  const choicePaymentMethod = (e: any) => {setPaymentMethod(e.target.value)}
 
   const buyTickets = () => {
-    setErrors(validateValues(paymentInputFields));
+    setErrors(validateValues({surname, name, phoneNumber, email}));
   }
 
   return (
@@ -96,15 +105,39 @@ export const Payment = () => {
                         </div>
                         <div className="passenger_data_main">
                             <div className="about_passenger pay_personal_data">
-                                <FullName nameValue={name} surnameValue={surname} patronimycValue={patronimyc} errSurname={errors.surname} errName={errors.name} titleColorClass={"pay_item_title"} validation={() => validateFields}/>
+                                <FullName 
+                                    nameValue={name} 
+                                    surnameValue={surname} 
+                                    patronimycValue={patronimyc} 
+                                    errSurname={errors.surname} 
+                                    errName={errors.name} 
+                                    titleColorClass={"pay_item_title"} 
+                                    validation={() => validateFields}
+                                />
                                 <div className="pd_item pd_item_contact">
                                     <span className="pd_item_title pay_item_title">Контактный телефон</span>
-                                    <input style={{ border: errors.phoneNumber ? "1px solid #FF3D00C2" : "" }} type="text" name="phoneNumber" className="pd_item-input contact_input" placeholder="+7_ _ _ _ _ _ _ _ _ _" value={phoneNumber} onChange={validateFields}/>
+                                    <input 
+                                        style={{ border: errors.phoneNumber ? "1px solid #FF3D00C2" : "" }} 
+                                        type="text" 
+                                        name="phoneNumber" 
+                                        className="pd_item-input contact_input" 
+                                        placeholder="+7_ _ _ _ _ _ _ _ _ _" 
+                                        value={phoneNumber} 
+                                        onChange={validateFields}
+                                    />
                                     {errors.phoneNumber ? <p className="error-text">{errors.phoneNumber}</p> : null}
                                 </div>
                                 <div className="pd_item pd_item_contact">
                                     <span className="pd_item_title pay_item_title">E-mail</span>
-                                    <input style={{ border: errors.email ? "1px solid #FF3D00C2" : "" }} type="text" name="email" className="pd_item-input contact_input" placeholder="inbox@gmail.ru" value={email} onChange={validateFields}/>
+                                    <input 
+                                        style={{ border: errors.email ? "1px solid #FF3D00C2" : "" }} 
+                                        type="text" 
+                                        name="email" 
+                                        className="pd_item-input contact_input" 
+                                        placeholder="inbox@gmail.ru" 
+                                        value={email} 
+                                        onChange={validateFields}
+                                    />
                                     {errors.email ? <p className="error-text">{errors.email}</p> : null}
                                 </div>
                             </div>
@@ -113,7 +146,13 @@ export const Payment = () => {
                             </div>
                             <div className="pay_method_container">
                                 <div className="pay_method_variant">
-                                    <input type="checkbox" className="pay_method_check" value="online" checked={paymentMethod=='online' ? true : false} onChange={choicePaymentMethod}/>
+                                    <input 
+                                        type="checkbox" 
+                                        className="pay_method_check" 
+                                        value="Онлайн" 
+                                        checked={paymentMethod=='Онлайн' ? true : false} 
+                                        onChange={choicePaymentMethod}
+                                    />
                                     <span className="pay_method_text">Онлайн</span>
                                 </div>
                                 <div className="online_pay_variants">
@@ -124,7 +163,13 @@ export const Payment = () => {
                             </div>
                             <div className="pay_method_container">
                                 <div className="pay_method_variant">
-                                    <input type="checkbox" className="pay_method_check" value="cash" checked={paymentMethod=='cash' ? true : false} onChange={choicePaymentMethod}/>
+                                    <input 
+                                        type="checkbox" 
+                                        className="pay_method_check" 
+                                        value="Наличными" 
+                                        checked={paymentMethod=='Наличными' ? true : false} 
+                                        onChange={choicePaymentMethod}
+                                    />
                                     <span className="pay_method_text">Наличными</span>
                                 </div>
                             </div>

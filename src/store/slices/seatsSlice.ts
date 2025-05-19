@@ -49,7 +49,7 @@ export interface ISeats {
     error?: string,
 }
 
-const initialState: ISeats = {
+const emptyData: ISeats = {
     trainWagonsSeats: {
         departure: [{
             coach: {
@@ -95,8 +95,12 @@ const initialState: ISeats = {
         }]
     },
     loading: false,
-    error: ""
+    error: "",
 }
+
+const savedData = localStorage.getItem('seats');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 const createSliceWithThunk = buildCreateSlice({
     creators: { asyncThunk: asyncThunkCreator }

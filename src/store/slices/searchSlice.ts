@@ -13,19 +13,22 @@ interface ISearch {
     backDate: Date | null,
 }
 
-
-const initialState: ISearch = {
+const emptyData: ISearch = {
     departureCity: {
-        id: '67ceb6548c75f00047c8f78d',
-        name: 'москва'
+        id: '',
+        name: ''
     },
     arrivalCity: {
-        id: '67ceb6548c75f00047c8f78e',
-        name: 'санкт-петербург'
+        id: '',
+        name: ''
     },
-    thereDate: '2025-03-23',
-    backDate: '2025-04-06',
+    thereDate: null,
+    backDate: null,
 }
+
+const savedData = localStorage.getItem('search');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 export const searchSlice = createSlice({
     name: "search",

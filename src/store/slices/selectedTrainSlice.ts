@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ISelectedTrain {
     selectedTrain: {
         departure: {
+            [x: string]: any;
             _id: string;
             train: {name: string;},
             from: {
@@ -35,7 +36,7 @@ interface ISelectedTrain {
     }
 }
 
-const initialState: ISelectedTrain = {
+const emptyData: ISelectedTrain = {
     selectedTrain: {
         departure: {
             _id: "",
@@ -70,6 +71,10 @@ const initialState: ISelectedTrain = {
     },
 }
 
+const savedData = localStorage.getItem('selectedTrain');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
+
 export const selectedTrainSlice = createSlice({
     name: "selectedTrain",
     initialState,
@@ -77,9 +82,12 @@ export const selectedTrainSlice = createSlice({
         selectedTrainOptions(state, action) {
             const { value, direction } = action.payload;
             state.selectedTrain[direction as keyof typeof initialState.selectedTrain] = value;
+        },
+        clearTrainOptions(state) {
+            state.selectedTrain = initialState.selectedTrain;
         }
     }
 })
 
-export const { selectedTrainOptions } = selectedTrainSlice.actions;
+export const { selectedTrainOptions, clearTrainOptions } = selectedTrainSlice.actions;
 export default selectedTrainSlice.reducer;

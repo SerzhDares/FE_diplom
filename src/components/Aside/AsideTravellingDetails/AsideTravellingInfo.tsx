@@ -7,8 +7,6 @@ interface AsideTravellingInfo {
     startDate: string;
     finishDate: string;
     trainNumber: string;
-    startPoint: string;
-    endPoint: string;
     startTime: string;
     finishTime: string;
     arrowDirectionClass: string;
@@ -21,8 +19,8 @@ interface AsideTravellingInfo {
 
 export const AsideTravellingInfo = ({
     directionClass, direction, startDate, finishDate, trainNumber,
-    startPoint, endPoint, startTime, finishTime, arrowDirectionClass, 
-    duration, departurePoint, arrivalPoint, departureStation, arrivalStation
+     startTime, finishTime, arrowDirectionClass, duration, departurePoint, 
+     arrivalPoint, departureStation, arrivalStation
 }: AsideTravellingInfo) => {
 
   const [isOpen, setIsOpen] = useState(true);
@@ -32,7 +30,7 @@ export const AsideTravellingInfo = ({
     <div className={`aside_block_item time_choosing ${directionClass}`}>
         <div className="time_choosing_title">
             <span className="time_choosing_text">{direction}</span>
-            <span className="travel_date">{startDate}</span>
+            <span className="travel_date">{direction == 'Туда' ? startDate : finishDate}</span>
             <MoreButton btnSetState={openBtn} btnState={isOpen}/>
         </div>
         <div className={isOpen ? "travel_info open" : "travel_info"}>
@@ -42,7 +40,10 @@ export const AsideTravellingInfo = ({
             </div>
             <div className="ti_text_block">
                 <span className="ti_text_option">Название</span>
-                <span className="ti_text_route">{startPoint}<br/>{endPoint}</span>
+                <span className="ti_text_route">
+                    {direction == 'Туда' ? departurePoint : arrivalPoint}<br/>
+                    {direction == 'Туда' ? arrivalPoint : departurePoint}
+                </span>
             </div>
             <div className="train_departure_arrival tda_details">
                 <div className="train_time departure_time">

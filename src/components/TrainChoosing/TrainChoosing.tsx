@@ -11,7 +11,9 @@ import { useAppSelector, useAppDispatch } from "../../hooks";
 import { fetchTrains, trainsState } from "../../store/slices/trainsSlice";
 import { dateFormatter, trainsTimeFormatter, travelDurationFormatter } from "../../dateTimeFormatter";
 import { Loading } from "../Loading/Loading";
-import { selectedTrainOptions } from "../../store/slices/selectedTrainSlice";
+import { selectedTrainOptions, clearTrainOptions } from "../../store/slices/selectedTrainSlice";
+import { removeAllSelectedSeats } from "../../store/slices/selectedSeatsSlice";
+import { removeAllPassengers } from "../../store/slices/passengersDataSlice";
 
 export const TrainChoosing = () => {
 
@@ -65,6 +67,9 @@ export const TrainChoosing = () => {
   }, [url])
 
   const setTrain = (train: {departure: {}, arrival: {}}) => {
+    dispatch(removeAllSelectedSeats());
+    dispatch(removeAllPassengers())
+    dispatch(clearTrainOptions());
     dispatch(selectedTrainOptions({
       value: train.departure,
       direction: "departure"

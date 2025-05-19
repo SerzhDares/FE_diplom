@@ -23,9 +23,6 @@ export const MainPage = () => {
     dispatch(swapValues());
   }
 
-  //далее идет код для валидации полей (нашел такой вариант в интернете), вынес в отдельный
-  //файл searchFieldsValidation.ts, но не знаю, как связать его с данным компонентом
-
   const [errors, setErrors] = useState({
     pointFrom: "",
     pointTo: "",

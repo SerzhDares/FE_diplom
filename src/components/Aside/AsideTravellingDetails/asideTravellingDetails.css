@@ -24,6 +24,12 @@
     padding-bottom: 25px;
     display: none;
 }
+
+.ti_direction_text {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
   
 .ti_text_block {
     display: flex;
@@ -44,6 +50,7 @@
 .ti_text_route {
     font-size: 16px;
     font-weight: 700;
+    text-transform: capitalize;
 }
   
 .ti_text_route,
@@ -59,6 +66,7 @@
   
 .ti_travel_date {
     padding-right: 0;
+    padding-left: 0;
     color: #928F94;
 }
   
@@ -122,5 +130,5 @@
   
 .total_price,
 .total_currency {
-    font-size: 46px;
+    font-size: 43px;
 }

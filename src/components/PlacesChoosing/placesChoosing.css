@@ -30,3 +30,16 @@
     font-weight: 700;
     margin-left: 20px;
 }
+
+.seats_total_price {
+    display: flex;
+    justify-content: end;
+    padding: 0 30px 15px;
+    font-size: 24px;
+}
+
+.seats_total_price_value {
+    font-weight: 700;
+    color: #FFA800;
+    margin-right: 5px;
+}

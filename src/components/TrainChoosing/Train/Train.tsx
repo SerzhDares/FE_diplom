@@ -73,7 +73,7 @@ export const Train = ({
                         <span className="seats_quantity">{seatTypeSeats}</span>
                         <span className="price_from">от</span>
                         <span className="price">
-                        <span className="price_value">{seatTypePrice}</span>
+                        <span className="price_value">{seatTypePrice + " "}</span>
                         <span className="currency ticket_currency">₽</span>
                         </span>
                     </div>
@@ -87,7 +87,7 @@ export const Train = ({
                                     <span className="wagon_type place_type_top">верхние</span>
                                     <span className="seats_quantity"></span>
                                     <span className="price">
-                                        <span className="price_value">{standardTopPrice}</span>
+                                        <span className="price_value">{standardTopPrice + " "}</span>
                                         <span className="currency ticket_currency">₽</span>
                                     </span>
                                 </div>
@@ -95,7 +95,7 @@ export const Train = ({
                                     <span className="wagon_type place_type_bottom">нижние</span>
                                     <span className="seats_quantity"></span>
                                     <span className="price">
-                                        <span className="price_value">{standardBottomPrice}</span>
+                                        <span className="price_value">{standardBottomPrice + " "}</span>
                                         <span className="currency ticket_currency">₽</span>
                                     </span>
                                 </div>
@@ -103,7 +103,7 @@ export const Train = ({
                                     <span className="wagon_type place_typу_side">боковые</span>
                                     <span className="seats_quantity"></span>
                                     <span className="price">
-                                        <span className="price_value">{standardSidePrice}</span>
+                                        <span className="price_value">{standardSidePrice + " "}</span>
                                         <span className="currency ticket_currency">₽</span>
                                     </span>
                                 </div>
@@ -111,7 +111,9 @@ export const Train = ({
                         </span>
                         <span className="price_from">от</span>
                         <span className="price">
-                        <span className="price_value">{Math.min(standardTopPrice, standardBottomPrice, standardSidePrice)}</span>
+                        <span className="price_value">
+                            {Math.min(standardTopPrice, standardBottomPrice, standardSidePrice) + " "}
+                        </span>
                         <span className="currency ticket_currency">₽</span>
                         </span>
                     </div>
@@ -171,9 +173,27 @@ export const Train = ({
             </div>
             <div className="options_button_block">
                 <div className="options_block">
-                    {haveWifi && <img src="src/images/wifi_dark.svg" alt="wifi" className="wagon_options_icon"/>}
-                    {haveConditioner && <img src={haveConditioner ? "src/images/conditioner_dark.svg" : ""} alt="conditioner" className="wagon_options_icon"/>}
-                    {isExpress && <img src={isExpress ? "src/images/express_dark.svg" : ""} alt="express" className="wagon_options_icon"/>}
+                    {haveWifi && 
+                        <img 
+                            src="src/images/wifi_dark.svg" 
+                            alt="wifi" 
+                            className="wagon_options_icon"
+                        />
+                    }
+                    {haveConditioner && 
+                        <img 
+                            src={haveConditioner ? "src/images/conditioner_dark.svg" : ""} 
+                            alt="conditioner" 
+                            className="wagon_options_icon"
+                        />
+                    }
+                    {isExpress && 
+                        <img 
+                            src={isExpress ? "src/images/express_dark.svg" : ""} 
+                            alt="express" 
+                            className="wagon_options_icon"
+                        />
+                    }
                     <img src="src/images/food_dark.svg" alt="food" className="wagon_options_icon"/>
                 </div>
                 <HashLink smooth to={routeLink}>

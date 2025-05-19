@@ -27,8 +27,13 @@
     background-color: #FFF;
 }
   
+.order_number,
 .order_number_text {
     font-weight: 700;
+}
+
+.order_number_text {
+    text-transform: uppercase;
 }
   
 .sum_text {
@@ -91,6 +96,7 @@
 .client_name {
     font-size: 36px;
     margin-bottom: 50px;
+    text-transform: capitalize;
 }
   
 .info_for_client {

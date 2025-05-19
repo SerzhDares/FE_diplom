@@ -24,8 +24,17 @@
   
 .confirm_passengers_info {
     width: 71%;
-    padding-top: 30px;
-    padding-bottom: 60px;
+    /* padding-top: 30px; */
+    padding-bottom: 30px;
+}
+
+.confirm_passengers_direction {
+    font-size: 22px;
+    padding: 15px 30px;
+}
+
+.confirm_passengers_direction:nth-child(n+2) {
+    border-top: 1px dashed #E5E5E5;
 }
   
 .confirm_price {

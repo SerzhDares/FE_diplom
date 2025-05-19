@@ -10,6 +10,11 @@ export const trainsTimeFormatter = (time: any) => {
     return formattedTravelTime;
 }
 
+export const trainsDateFormatter = (time: any) => {
+    const travelDate = new Date(time*1000).toLocaleDateString();
+    return travelDate;
+}
+
 export const travelDurationFormatter = (time: any) => {
     const durationTime = time/3600;
     const hours = Math.floor(durationTime);

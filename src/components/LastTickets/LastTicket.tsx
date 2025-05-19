@@ -1,5 +1,5 @@
-import './lastTickets.css';
 import { ITrainParams } from '../../models/models';
+import './lastTickets.css';
 
 export const LastTicket = ({
     thereFrom, thereStationFrom, thereTo, thereStationTo, 
@@ -25,7 +25,7 @@ export const LastTicket = ({
                 <img src="src/images/food.svg" alt="food" className="wagon_options_icon"/>
             </div>
             <div className="last_ticket_price">
-                <span className="price_from last_ticket_price_from">от </span>
+                <span className="price_from last_ticket_price_from">от</span>
                 <span className="last_ticket_price_value">{minPrice}</span>
                 <span className="currency last_ticket_currency">₽</span>
             </div>

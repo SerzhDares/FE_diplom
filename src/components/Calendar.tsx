@@ -1,10 +1,9 @@
-// import { useState } from 'react';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from  "react-datepicker";
 import { ru } from 'date-fns/locale/ru';
 import { useAppDispatch } from '../hooks';
 import { changeBackDate, changeThereDate, clearThereDate, clearBackDate } from '../store/slices/searchSlice';
+import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale('ru', ru);
 
@@ -20,8 +19,6 @@ interface DatePickerProps {
 
 export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass, startDate, changeBirthday, clearBirthday}: DatePickerProps) => {
 
-  // const [startDate, setStartDate] = useState<Date | null>(null);
-
   const dispatch = useAppDispatch();
 
   return (
@@ -29,7 +26,6 @@ export const Calendar = ({minDate, maxDate, monthYearDropdown, errorClass, start
       <DatePicker
         locale="ru" 
         selected={startDate}
-        // onChange={(date) => setStartDate(date)}
         onChange={(date) => {
           if (errorClass == "birthday_input" || errorClass == "input-error birthday_input") {
             changeBirthday ? changeBirthday(date) : undefined;

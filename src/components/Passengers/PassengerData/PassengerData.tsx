@@ -1,33 +1,65 @@
-import './passengerData.css';
 import { useState } from 'react';
-import { CheckSex } from './CheckSex';
 import { FullName } from './FullName';
 import { ClickAwayListener } from "@mui/material";
-// import { BirthDatePicker } from '../../BirthDatePicker';
 import { Calendar } from '../../Calendar';
-import { FieldsValues } from '../../../validation';
+import { FieldsValues } from '../../../models/models';
+import { useAppDispatch } from '../../../hooks';
+import { addPassenger, removePassenger } from '../../../store/slices/passengersDataSlice';
+import classNames from 'classnames';
+import './passengerData.css';
 
 interface PassengerDataProps {
     passengerNumber: number;
-    deletePassenger: () => void;
+    direction: string;
+    wagonId: string;
+    wagonName: string;
+    seatNumber: number;
+    passId: string;
+    passName?: string;
+    passSurname?: string;
+    passPatronimyc?: string;
+    passSex?: string;
+    passBirthday: Date | null;
+    passLimMob?: boolean;
+    passDocument?: string;
+    passSeries?: string;
+    passNumber?: string;
+    passIndex: number;
+    passBtnText?: string;
+    // deletePassenger: () => void;
 }
 
-export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataProps) => {
+export const PassengerData = (
+    {passengerNumber, direction, wagonId, wagonName, seatNumber, passId, 
+    passName, passSurname, passPatronimyc, passSex, passBirthday, passLimMob,
+    passDocument, passSeries, passNumber, passIndex, passBtnText}: PassengerDataProps) => {
 
-  const [isOpen, setIsOpen] = useState(true);
+  const dispatch = useAppDispatch();
+
+  const [isOpen, setIsOpen] = useState(passengerNumber == 1 && direction == "departure" ? true : false);
   const openBtn = () => {setIsOpen(!isOpen)};
 
-  const [ageValue, setAgeValue] = useState("Взрослый");
-  const [docValue, setDocValue] = useState("Паспорт РФ");
+// const [ageValue, setAgeValue] = useState(passId == "в" ? "Взрослый": "Детский");
+  let ageValue = (passId == "в" || passId == "Взрослый") ? "Взрослый": "Детский";
+  const [docValue, setDocValue] = useState(passId == "р" ? "Свидетельство о рождении" : "Паспорт РФ");
+
+  const [sex, setSex] = useState(passSex ? (passSex == 'женский' ? 'Ж' : 'М') : 'М');
+  const checkSex = (e: any) => {setSex(e.target.value)};
+
+  const[limMob, setLimMob] = useState(passLimMob ? passLimMob : false);
+
+  const [btnText, setBtnText] = useState(passBtnText ? passBtnText : "Подтвердить");
 
   const chooseVariant = (e: any) => {
-    e.target.nextElementSibling.classList.toggle('open');
+    btnText == "Подтвердить" ? e.target.nextElementSibling.classList.toggle('open')
+    : () => {}
   }
 
   const activeVariant = (e: any) => {
     e.target.parentElement.classList.remove('open');
-    e.target.classList.contains('age_select_option') ? 
-    setAgeValue(e.target.textContent) : setDocValue(e.target.textContent);
+    // e.target.classList.contains('age_select_option') ? 
+    // setAgeValue(e.target.textContent) : setDocValue(e.target.textContent);
+    setDocValue(e.target.textContent);
   }
 
   const hideMenu = (e: any) => {
@@ -41,22 +73,24 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
     }
   }
 
-  const [inputFields, setInputFields] = useState<FieldsValues>({
-    surname: "",
-    name: "",
-    series: "",
-    passportNumber: "",
-    birthCertificate: ""
-  })
+  const [name, setName] = useState(passName ? passName : '');
+  const [surname, setSurname] = useState(passSurname ? passSurname : '');
+  const [patronimyc, setPatronimyc] = useState(passPatronimyc ? passPatronimyc : '');
+  const [birthday, setBirthday] = useState<Date | null>(passBirthday ? passBirthday : null);
+  const [series, setSeries] = useState(passSeries ? passSeries : '');
+  const [passportNumber, setPassportNumber] = useState(passNumber ? passNumber : '');
+  const [birthCertificate, setBirthCertificate] = useState(passNumber ? passNumber : '');
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [patronimyc, setPatronimyc] = useState('');
-  const [birthday, setBirthday] = useState<Date | null>(null);
-  const [series, setSeries] = useState('');
-  const [passportNumber, setPassportNumber] = useState('');
-  const [birthCertificate, setBirthCertificate] = useState('');
-
+  const clearPassengerData = () => {
+    setName('');
+    setSurname('');
+    setPatronimyc('');
+    setBirthday(null);
+    setSeries('');
+    setPassportNumber('');
+    setBirthCertificate('');
+    // deletePassenger();
+  }
 
   const handleChange = (e: any) => {
     const result = e.target.value.replace(/[^а-яА-яёЁ-]/gi, '');
@@ -71,7 +105,6 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
         const result = e.target.value.replace(/[^a-zA-Zа-яА-Я0-9]/gi, '');
         setBirthCertificate(result);
     }
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   }
 
   const [errors, setErrors] = useState({
@@ -83,9 +116,11 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
     birthCertificate: ""
   });
 
-//   const [submitting, setSubmitting] = useState(false);
-
-  const validateValues = (e: any, inputValues: FieldsValues) => {
+  const validateValues = (
+    e: any, 
+    {surname, name, birthday, series, 
+    passportNumber, birthCertificate}: FieldsValues
+    ) => {
     
     let errors = {
         surname: "",
@@ -96,29 +131,47 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
         birthCertificate: ""
     };
 
-    if (!inputValues.surname) errors.surname = "Введите фамилию";
-    if (!inputValues.name) errors.name = "Введите имя";
+    if (!surname) errors.surname = "Введите фамилию";
+    if (!name) errors.name = "Введите имя";
     if (!birthday) errors.birthday = "Введите дату в формате ДД.ММ.ГГГГ";
-    if (!inputValues.series || inputValues.series.length < 4) {
+    if (!series || series.length < 4) {
         docValue == "Паспорт РФ" ? errors.series = "Серия документа должна состоять из 4 цифр" : errors.series = "";
     }
-    if (!inputValues.passportNumber || inputValues.passportNumber.length < 6) {
+    if (!passportNumber || passportNumber.length < 6) {
         docValue == "Паспорт РФ" ? errors.passportNumber = "Номер документа должен состоять из 6 цифр" : errors.passportNumber = "";
     }
-    if (!inputValues.birthCertificate || inputValues.birthCertificate.length < 12) {
+    if (!birthCertificate || birthCertificate.length < 12) {
         docValue == "Свидетельство о рождении" ? errors.birthCertificate = "Номер состоит из 12 символов." : errors.birthCertificate = "";
     }
-
     if (!errors.surname && !errors.name && !errors.birthday &&
         !errors.series && !errors.passportNumber && !errors.birthCertificate) {
             e.target.parentElement.classList.add('success-passenger_data');
+            btnText == "Подтвердить" && dispatch(addPassenger({
+                direction: direction,
+                age: ageValue,
+                surname: surname,
+                name: name,
+                patronimyc: patronimyc,
+                sex: sex == "М" ? "мужской" : "женский",
+                birthday: new Date(birthday ? birthday : "").toLocaleDateString(),
+                limMob: limMob,
+                document: docValue,
+                series: series,
+                number: docValue == "Паспорт РФ" ? passportNumber : birthCertificate,
+                wagonId: wagonId,
+                wagonName: wagonName,
+                seatNumber: seatNumber,
+                passIndex: passIndex,
+                btnText: "Изменить"
+            }))
+            setBtnText("Изменить");
     }
     return errors;
   }
 
   const handleSubmit = (e: any) => {
-    setErrors(validateValues(e, inputFields));
-    console.log(birthday)
+    setErrors(validateValues(e, {surname, name, birthday, series, passportNumber, birthCertificate}));
+    btnText == "Изменить" && dispatch(removePassenger({direction, wagonName, seatNumber})) && setBtnText("Подтвердить");
   }
 
   return (
@@ -136,76 +189,133 @@ export const PassengerData = ({passengerNumber, deletePassenger}: PassengerDataP
                     </svg>  
                 </button>
                 <span className="passenger_data_title_text">Пассажир {passengerNumber}</span>
+                <span className="train_direction_value">{" (" + (direction == "departure" ? "Туда" : "Обратно") + ")"}</span>
             </div>
-            <button className="delete_passenger_btn" onClick={deletePassenger}>
-                <img src="src/images/delete_passenger_icon.svg" alt="удалить" className="delete_passenger_icon"/>
-            </button>
+            {btnText == "Подтвердить" && 
+                <button className="delete_passenger_btn" onClick={() => clearPassengerData()}>
+                    <img src="src/images/delete_passenger_icon.svg" alt="удалить" className="delete_passenger_icon"/>
+                </button>
+            }
         </div>
         <div className={isOpen? "passenger_data_main" : "passenger_data_main close"}>
-            <div className="about_passenger">
-                <ClickAwayListener onClickAway={hideMenu}>
-                    <div className="age_variants_selector">
-                        <div className="variant_select" onClick={chooseVariant}>{ageValue}</div>
-                        <div className="select_options age_select_options" onClick={activeVariant}>
-                            <div className="select_option age_select_option">Взрослый</div>
-                            <div className="select_option age_select_option">Детский</div>
+            <form className='passenger_data_form'>
+                <fieldset className="passenger_data_fieldset" disabled={btnText == "Подтвердить" ? false : true}>
+                    <div className="about_passenger"> 
+                        <ClickAwayListener onClickAway={hideMenu}>
+                            <div className="age_variants_selector">
+                                <div className="variant_select" /* onClick={chooseVariant} */>{ageValue}</div>
+                                {/* <div className="select_options age_select_options" onClick={activeVariant}>
+                                    <div className="select_option age_select_option">Взрослый</div>
+                                    <div className="select_option age_select_option">Детский</div>
+                                </div> */}
+                            </div>
+                        </ClickAwayListener>
+                        <FullName 
+                            nameValue={passName ? passName : name} 
+                            surnameValue={passSurname ? passSurname : surname} 
+                            patronimycValue={passPatronimyc ? passPatronimyc : patronimyc} 
+                            errSurname={errors.surname} 
+                            errName={errors.name} 
+                            validation={() => handleChange}
+                        />
+                        <div className="sex_birthday_container">
+                            <div className="sb_item">
+                                <span className="pd_item_title">Пол</span>
+                                <div className="check_sex_container">
+                                    <label className="sex-radio">
+                                        <input 
+                                            type="radio" 
+                                            className="sex-radio_input sex-radio_input_male" 
+                                            value='М' 
+                                            checked={passSex ? (passSex  == 'мужской' ? true : false) : (sex == 'М' ? true : false)} 
+                                            onChange={checkSex}
+                                        />
+                                        <span className="check_sex check_sex_male">М</span>
+                                    </label>
+                                    <label className="sex-radio">
+                                        <input 
+                                            type="radio" 
+                                            className= "sex-radio_input sex-radio_input_female" 
+                                            value='Ж' 
+                                            checked={passSex ? (passSex  == 'женский' ? true : false) : (sex == 'Ж' ? true : false)} 
+                                            onChange={checkSex}
+                                        />
+                                        <span className="check_sex check_sex_female">Ж</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="sb_item sb_item_birthday" id="birthday">
+                                <span className="pd_item_title">Дата рождения</span>
+                                <Calendar 
+                                    startDate={passBirthday ? passBirthday : birthday} 
+                                    changeBirthday={(date: Date | null) => setBirthday(date)} 
+                                    clearBirthday={() => setBirthday(null)}
+                                    minDate={undefined}
+                                    maxDate={new Date()} 
+                                    monthYearDropdown={true} 
+                                    errorClass={errors.birthday ? "input-error birthday_input" : "birthday_input"}
+                                />
+                                {errors.birthday ? <p className="error-text">{errors.birthday}</p> : null}
+                            </div>
+                        </div>
+                        <div className="limited_mobility_container">
+                            <input 
+                                type="checkbox" 
+                                className="lm_checkbox" 
+                                checked={limMob}
+                                onClick={() => setLimMob(!limMob)}
+                            />
+                            <span className="lm_text">ограниченная подвижность</span>
                         </div>
                     </div>
-                </ClickAwayListener>
-                <FullName nameValue={name} surnameValue={surname} patronimycValue={patronimyc} errSurname={errors.surname} errName={errors.name} validation={() => handleChange}/>
-                <div className="sex_birthday_container">
-                    <CheckSex/>
-                    <div className="sb_item sb_item_birthday" id="birthday">
-                        <span className="pd_item_title">Дата рождения</span>
-                        <Calendar 
-                        startDate={birthday} 
-                        changeBirthday={(date: Date | null) => setBirthday(date)} 
-                        clearBirthday={() => setBirthday(null)}
-                        minDate={undefined}
-                        maxDate={new Date()} 
-                        monthYearDropdown={true} 
-                        errorClass={errors.birthday ? "input-error birthday_input" : "birthday_input"}/>
-                        {errors.birthday ? <p className="error-text">{errors.birthday}</p> : null}
-                    </div>
-                </div>
-                <div className="limited_mobility_container">
-                    <input type="checkbox" className="lm_checkbox"/>
-                    <span className="lm_text">ограниченная подвижность</span>
-                </div>
-            </div>
-            <div className="document_container">
-                <ClickAwayListener onClickAway={hideMenu}>
-                    <div className="document_item doc_variants_selector">
-                        <span className="pd_item_title">Тип документа</span>
-                        <div className="variant_select doc_select" onClick={chooseVariant}>{docValue}</div>
-                        <div className="select_options doc_options" onClick={activeVariant}>
-                            <div className="select_option doc_select_option">Паспорт РФ</div>
-                            <div className="select_option doc_select_option">Свидетельство о рождении</div>
+                    <div className="document_container">
+                        <ClickAwayListener onClickAway={hideMenu}>
+                            <div className="document_item doc_variants_selector">
+                                <span className="pd_item_title">Тип документа</span>
+                                <div 
+                                    className={classNames("variant_select doc_select", passId == "в" && "variant_select-variants")} 
+                                    onClick={passId == "в" ? chooseVariant : () => {}}
+                                >
+                                    {passDocument ? passDocument : docValue}
+                                </div>
+                                <div className="select_options doc_options" onClick={activeVariant}>
+                                    <div className="select_option doc_select_option">Паспорт РФ</div>
+                                    <div className="select_option doc_select_option">Свидетельство о рождении</div>
+                                </div>
+                            </div>
+                        </ClickAwayListener>
+                        <div className={(passDocument ? passDocument : docValue) == "Паспорт РФ" ? "document_item" : "document_item close"}>
+                            <span className="pd_item_title">Серия</span>
+                            <input style={{ border: errors.series ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={4} name="series" value={passSeries ? passSeries : series} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __" onChange={handleChange}/>
+                            {errors.series ? <p className="error-text">{errors.series}</p> : null}
+                        </div>
+                        <div className={(passDocument ? passDocument : docValue) == "Паспорт РФ" ? "document_item" : "document_item close"}>
+                            <span className="pd_item_title">Номер</span>
+                            <input style={{ border: errors.passportNumber ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={6} name="passportNumber" value={passNumber ? passNumber : passportNumber} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __ __ __" onChange={handleChange}/>
+                            {errors.passportNumber ? <p className="error-text">{errors.passportNumber}</p> : null}
+                        </div>
+                        <div className={(passDocument ? passDocument : docValue) == "Свидетельство о рождении" ? "document_item" : "document_item close"}>
+                            <span className="pd_item_title">Номер</span>
+                            <input style={{ border: errors.birthCertificate ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={12} className="pd_item-input doc_input bc_input" name="birthCertificate" value={passNumber ? passNumber : birthCertificate} placeholder="_ _ _ _ _ _ _ _ _ _ _ _" onChange={handleChange}/>
+                            {errors.birthCertificate ? <p className="error-text">{errors.birthCertificate}<br/>Пример: VIIIУН256319</p> : null}
                         </div>
                     </div>
-                </ClickAwayListener>
-                <div className={docValue == "Паспорт РФ" ? "document_item" : "document_item close"}>
-                    <span className="pd_item_title">Серия</span>
-                    <input style={{ border: errors.series ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={4} name="series" value={series} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __" onChange={handleChange}/>
-                    {errors.series ? <p className="error-text">{errors.series}</p> : null}
-                </div>
-                <div className={docValue == "Паспорт РФ" ? "document_item" : "document_item close"}>
-                    <span className="pd_item_title">Номер</span>
-                    <input style={{ border: errors.passportNumber ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={6} name="passportNumber" value={passportNumber} className="pd_item-input doc_input passport_input" placeholder="__ __ __ __ __ __" onChange={handleChange}/>
-                    {errors.passportNumber ? <p className="error-text">{errors.passportNumber}</p> : null}
-                </div>
-                <div className={docValue == "Свидетельство о рождении" ? "document_item" : "document_item close"}>
-                    <span className="pd_item_title">Номер</span>
-                    <input style={{ border: errors.birthCertificate ? "1px solid #FF3D00C2" : "" }} type="text" maxLength={12} className="pd_item-input doc_input bc_input" name="birthCertificate" value={birthCertificate} placeholder="_ _ _ _ _ _ _ _ _ _ _ _" onChange={handleChange}/>
-                    {errors.birthCertificate ? <p className="error-text">{errors.birthCertificate}<br/>Пример: VIIIУН256319</p> : null}
-                </div>
-            </div>
+                    <div className="wagon_place_container">
+                        <div className="wagon_name">Вагон:
+                            <span className="wagon_name_value">{" " + wagonName}</span>
+                        </div>
+                        <div className="place_number">Место:
+                            <span className="place_number_value">{" " + seatNumber}</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
             <div style={{background:   
                 errors.surname || errors.name || errors.birthday ||
                 errors.series || errors.passportNumber ||
                 errors.birthCertificate ? "#FF3D0061" 
                 : ""}} className="next-passenger_container">
-                <button className="transparent_black_btn next-pass_btn" onClick={handleSubmit}>Следующий пассажир</button>
+                <button className="transparent_black_btn next-pass_btn" onClick={handleSubmit}>{btnText}</button>
             </div>
         </div>
     </div>

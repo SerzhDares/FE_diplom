@@ -16,7 +16,13 @@ export const RatingBlock = () => {
                 
             return (
                 <label key={i}>
-                    <input type="radio" className="star-input" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}/>
+                    <input 
+                      type="radio" 
+                      className="star-input" 
+                      name="rating" 
+                      value={ratingValue} 
+                      onClick={() => setRating(ratingValue)}
+                    />
                     <FaStar className="star" size={40}
                       color={ratingValue <= (hover || rating) ? "yellow" : "#F4F3F6"}
                       onMouseEnter={() => setHover(ratingValue)}

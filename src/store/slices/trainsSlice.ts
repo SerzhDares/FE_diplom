@@ -9,7 +9,7 @@ interface IGetTrains {
     error: string
 }
 
-const initialState: IGetTrains = {
+const emptyData: IGetTrains = {
     trains: {
         total_count: 0,
         items: []
@@ -17,6 +17,10 @@ const initialState: IGetTrains = {
     loading: false,
     error: ""
 }
+
+const savedData = localStorage.getItem('trains');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 const createSliceWithThunk = buildCreateSlice({
     creators: { asyncThunk: asyncThunkCreator }
@@ -37,7 +41,6 @@ export const trainsSlice = createSliceWithThunk({
                     return rejectWithValue("Не удалось загрузить данные");
                 }
                 const data = await response.json();
-                console.log(data);
                 return data;
             } catch (err) {
                 return rejectWithValue(err);

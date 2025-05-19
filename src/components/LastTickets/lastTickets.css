@@ -51,10 +51,15 @@
 .currency {
     color: #928F94;
 }
+
+.last_ticket_price_from {
+    margin-right: 7px;
+}
   
 .last_ticket_price_value {
     color: #FFA800;
     font-weight: 700;
+    margin-right: 5px;
 }
   
 .last_ticket_price_value,

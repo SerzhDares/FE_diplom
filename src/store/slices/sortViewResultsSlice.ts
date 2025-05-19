@@ -10,7 +10,7 @@ interface ISearchResults {
     }
 }
 
-const initialState: ISearchResults = {
+const emptyData: ISearchResults = {
     limit: 5,
     currentPage: 1,
     offset: 0,
@@ -19,6 +19,10 @@ const initialState: ISearchResults = {
         value: 'date'
     }
 }
+
+const savedData = localStorage.getItem('sortViewResults');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 export const sortViewResultsSlice = createSlice({
     name: "sortViewResults",

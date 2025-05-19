@@ -24,9 +24,14 @@
     display: flex;
 }
   
-.passenger_data_title_text {
+.passenger_data_title_text,
+.train_direction_value {
     font-size: 30px;
     color: #292929;
+}
+
+.train_direction_value {
+    margin-left: 15px;
 }
   
 .passenger_data_btn {
@@ -45,6 +50,12 @@
     background-color: #FFF;
     border-top: 1px dashed #928F94
 }
+
+.passenger_data_fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
   
 .about_passenger {
     padding: 40px 35px 0;
@@ -57,14 +68,18 @@
   
 .variant_select {
     margin-bottom: 45px;
+    cursor: default;
+    /* cursor: pointer;
+    background: url('/src/images/select_arrow.svg') no-repeat;
+    background-position: right 10px center; */
+    display: flex;
+    align-items: center;
+}
+
+.variant_select-variants {
     cursor: pointer;
     background: url('/src/images/select_arrow.svg') no-repeat;
     background-position: right 10px center;
-    display: flex;
-    align-items: center;
-    /* -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; */
 }
 
 .select_options {
@@ -249,7 +264,23 @@
 .doc_option {
     width: 320px;
 }
-  
+
+.wagon_place_container {
+    padding: 40px 35px;
+    border-bottom: 1px dashed #928F94;
+    display: flex;
+    font-size: 24px;
+}
+
+.wagon_name {
+    margin-right: 30px;
+}
+
+.wagon_name_value,
+.place_number_value {
+    font-weight: 700;
+}
+
 .next-passenger_container {
     display: flex;
     justify-content: flex-end;

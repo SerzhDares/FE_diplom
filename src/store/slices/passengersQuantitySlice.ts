@@ -15,7 +15,7 @@ interface IPassengersQuantity {
     }
 }
 
-const initialState: IPassengersQuantity = {
+const emptyData: IPassengersQuantity = {
     passQuantity: {
         departure: {
             adults: "0",
@@ -29,6 +29,10 @@ const initialState: IPassengersQuantity = {
         }
     }
 }
+
+const savedData = localStorage.getItem('passengersQuantity');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 const passengersQuantitySlice = createSlice({
     name: "passengersQuantity",
@@ -45,6 +49,9 @@ const passengersQuantitySlice = createSlice({
         setPassQuantityChildrenNoSeat (state, action) {
             const { direction, value } = action.payload;
             state.passQuantity[direction as keyof typeof initialState.passQuantity].childrenNoSeat = value;
+        },
+        clearPassQuantity(state) {
+            state.passQuantity = initialState.passQuantity;
         }
     }
 })
@@ -52,6 +59,7 @@ const passengersQuantitySlice = createSlice({
 export const { 
     setPassQuantityAdults,
     setPassQuantityChildren,
-    setPassQuantityChildrenNoSeat 
+    setPassQuantityChildrenNoSeat,
+    clearPassQuantity
 } = passengersQuantitySlice.actions;
 export default passengersQuantitySlice.reducer;

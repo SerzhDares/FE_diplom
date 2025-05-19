@@ -86,7 +86,8 @@ body {
   margin-bottom: 10px;
 }
 
-input[type=text]::-webkit-input-placeholder {
+input[type=text]::-webkit-input-placeholder,
+input[type=email]::-webkit-input-placeholder{
 	font-size: 18px;
 	color: rgba(229, 229, 229, 1);
 }

@@ -31,7 +31,7 @@ export const Footer = () => {
           <a href="#header">
             <img src="src/images/footer-button_icon.svg" alt="up" className="footer_btn"/>
           </a>
-          <span className="footer_last_text">2024 WEB</span>
+          <span className="footer_last_text">{new Date().getFullYear()} WEB</span>
         </div>
       </div>
     </footer>

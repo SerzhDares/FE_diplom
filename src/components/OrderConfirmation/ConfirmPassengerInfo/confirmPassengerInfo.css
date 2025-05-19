@@ -36,4 +36,5 @@
 .pd_confirm_text_title {
     color: #292929;
     margin-bottom: 15px;
+    text-transform: capitalize;
 }

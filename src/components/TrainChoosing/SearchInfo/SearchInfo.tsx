@@ -1,6 +1,11 @@
 import { ClickAwayListener } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { changeOffset, resultsLimit, setCurrentPage, sortResults } from "../../../store/slices/sortViewResultsSlice";
+import { 
+  changeOffset, 
+  resultsLimit, 
+  setCurrentPage, 
+  sortResults 
+} from "../../../store/slices/sortViewResultsSlice";
 import './searchInfo.css';
 
 interface SearchInfoProps {
@@ -32,7 +37,9 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
 
   const activeSortVariant = (e: any) => {
     document.querySelector('.sort_select')?.classList.remove('open');
-    dispatch(sortResults({title: e.target.textContent, value: selectedSortVariant(e.target.textContent)}));
+    dispatch(sortResults({
+      title: e.target.textContent, value: selectedSortVariant(e.target.textContent)
+    }));
     dispatch(changeOffset(0));
     dispatch(setCurrentPage(1));
   }
@@ -59,9 +66,21 @@ export const SearchInfo = ({variantsFound}: SearchInfoProps) => {
         <span className="view_variants">показывать по:
             {variantsQuantity.map(variant => (
               variant == limit ? 
-                <span className="view_number view_number_active" key={variant} onClick={activeQuantityVariant}>{limit}</span> 
+                <span 
+                  className="view_number view_number_active" 
+                  key={variant} 
+                  onClick={activeQuantityVariant}
+                >
+                  {limit}
+                </span> 
               : variant <= variantsFound ? 
-                <span className="view_number" key={variant} onClick={activeQuantityVariant}>{variant}</span>
+                <span 
+                  className="view_number" 
+                  key={variant} 
+                  onClick={activeQuantityVariant}
+                >
+                  {variant}
+                </span>
               : <span className="view_number" key={variant}></span>
             ))}
         </span>

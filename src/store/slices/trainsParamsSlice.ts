@@ -41,7 +41,7 @@ interface ITrainOptions {
     }
 }
 
-const initialState: ITrainOptions = {
+const emptyData: ITrainOptions = {
     options: {
         firstClass: false,
         secondClass: false,
@@ -81,6 +81,10 @@ const initialState: ITrainOptions = {
         backSection: false
     }
 }
+
+const savedData = localStorage.getItem('trainsParams');
+
+const initialState = savedData ? JSON.parse(savedData) : emptyData;
 
 export const trainsParamsSlice = createSlice ({
     name: "trainsParams",
